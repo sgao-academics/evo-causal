@@ -1,0 +1,32 @@
+# Manuscript (NOT included in replication repo)
+paper/
+manuscript/
+*.pdf
+*.tex
+*.docx
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.aux
+*.out
+
+# Packaging
+Replication_Package.zip
+LaTeX_Source.zip
+_pkg_tmp/
+_rep_test/
+_verify/
+
+# Notebooks
+notebooks/
+
+# Temporary scripts
+scripts/_fix_paths.py
+scripts/figures/_fix_paths.py
+
+# OS
+.DS_Store
+Thumbs.db
