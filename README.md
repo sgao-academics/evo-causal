@@ -13,6 +13,8 @@ This verifies the PIC implementation, validates the checkpoint, and generates al
 
 ## Full Replication (Requires GPU, ~10 hours)
 
+The Causal Transformer experiments use [**causalscale**](https://github.com/sgao-academics/causalscale) — our open-source engine for scaling gradient-based causal discovery to genome-wide resolution. If you find this work useful, please check it out.
+
 ```bash
 pip install causalscale dagma-linear
 python scripts/run_master_all.py          # Phase 1–5 experiments
