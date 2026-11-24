@@ -20,6 +20,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RES = os.path.join(ROOT, 'results')
 FIG = os.path.join(ROOT, 'figures')
+# figures/ is not tracked, so on a fresh clone it does not exist yet.
+os.makedirs(FIG, exist_ok=True)
 
 
 from palette import PAL, INK, GREY, make_cmap
