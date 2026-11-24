@@ -192,7 +192,21 @@ def felsenstein_pic(data: np.ndarray, tree: PhyloNode) -> np.ndarray:
 
     Returns:
         contrasts: (n_tips - 1, d) matrix of independent contrasts
+
+    Warning
+    -------
+    The recursion writes the contrast-adjusted branch length back onto each internal node
+    (that is how the parent step learns the variance of the aggregated subtree). A second
+    call on the same tree object therefore returns different, wrong contrasts. Rather than
+    relying on callers to remember this, a tree is marked once used and a repeat call
+    raises, so the failure is loud instead of silent. Build a fresh tree per call; that is
+    one object construction and costs nothing next to the regression itself.
     """
+    if getattr(tree, '_pic_consumed', False):
+        raise RuntimeError(
+            'felsenstein_pic mutates branch lengths: this tree object has already been '
+            'used for contrasts. Rebuild the tree and call again.')
+    tree._pic_consumed = True
     _, contrasts = _compute_contrasts_recursive(tree, data)
     return np.array(contrasts)
 
@@ -257,170 +271,28 @@ def build_vertebrate_tree() -> Tuple[PhyloNode, Dict[str, int], List[str]]:
     return tree, name_to_idx, species_names
 
 
-def generate_realistic_evo_data(
-    tree: PhyloNode,
-    species_names: List[str],
-    n_genes: int = 200,
-    n_causal: int = 30,
-    phylo_signal: float = 0.3,  # REDUCED from 0.7 to 0.3
-    causal_strength: float = 2.0,  # AMPLIFIED
-    seed: int = 42,
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Generate realistic evolutionary data with MANAGEABLE phylogenetic signal.
+def generate_realistic_evo_data(*args, **kwargs):
+    """REMOVED 2026-11-24.
 
-    Key changes:
-    - phylo_signal=0.3 instead of 0.7-1.0 (more realistic for gene expression)
-    - causal_strength=2.0 instead of 0.3-1.2 (stronger signal)
-    - Continuous traits with Brownian motion + causal effects
+    The former body built the between-species covariance from the column index:
 
-    Args:
-        tree: rooted phylogenetic tree
-        species_names: ordered list of species names
-        n_genes: number of genes/traits
-        n_causal: number of true causal edges
-        phylo_signal: Blomberg's K scaling (0=no signal, 1=Brownian)
-        causal_strength: magnitude of causal effects
-        seed: random seed
+        d = rng.uniform(0.1, 0.5) * phylo_signal
+        if abs(i - j) > n_species // 2:
+            d *= 2.0
 
-    Returns:
-        X: (n_species, n_genes) trait matrix
-        W_true: (n_genes, n_genes) true causal adjacency
-        edges_true: list of (i, j) edge tuples
+    Nothing in that expression refers to the tree, so the resulting covariance is a
+    phylogenetic decoration rather than a phylogenetic process. That is the precise
+    criticism the Editor-in-Chief made of the rejected manuscript, and it is not a
+    criticism worth inviting twice. Use run_revision.simulate, where the latent factor is
+    drawn with covariance V taken from the tree (L_V L_V^T = V) and therefore has
+    phylogenetic structure by construction.
+
+    Raising rather than returning zeros, so an unnoticed import cannot produce numbers.
     """
-    rng = np.random.RandomState(seed)
-    n_species = len(species_names)
-
-    # Build phylogenetic covariance from tree distances
-    # First, get pairwise distances from the tree
-    def _compute_pairwise_dist(node: PhyloNode) -> np.ndarray:
-        """Compute pairwise distances between all tips."""
-        n = len([n for n in _iter_tips(node)])
-        # Simple approach: use a distance matrix
-        dist = np.zeros((n_species, n_species))
-
-        def _collect_tips(node, path_len=0.0, tip_paths=None):
-            if tip_paths is None:
-                tip_paths = {}
-            if node.is_tip and node.index is not None:
-                tip_paths[node.index] = path_len
-            for child in node.children:
-                _collect_tips(child, path_len + child.branch_length, tip_paths)
-            return tip_paths
-
-        tip_paths = _collect_tips(node)
-        for i in range(n_species):
-            for j in range(i + 1, n_species):
-                # Simplified: use path lengths
-                dist[i, j] = abs(tip_paths.get(i, 0) - tip_paths.get(j, 0))
-                dist[j, i] = dist[i, j]
-        return dist
-
-    def _iter_tips(node):
-        if node.is_tip:
-            yield node
-        for child in node.children:
-            yield from _iter_tips(child)
-
-    # Build phylogenetic covariance
-    tree_dist = np.zeros((n_species, n_species))
-    for i in range(n_species):
-        for j in range(i + 1, n_species):
-            # Use a Brownian motion covariance model
-            # C_ij = exp(-d_ij / scale) * sigma^2
-            # Simpler: use random ultrametric-like distances
-            if i < j:
-                d = rng.uniform(0.1, 0.5) * phylo_signal
-                if abs(i - j) > n_species // 2:
-                    d *= 2.0  # distant clades
-                tree_dist[i, j] = d
-                tree_dist[j, i] = d
-
-    C = np.exp(-tree_dist / max(tree_dist.std(), 1e-8))
-    C += 0.1 * np.eye(n_species)
-    eigvals, eigvecs = np.linalg.eigh(C)
-    eigvals = np.maximum(eigvals, 1e-6)
-    L = eigvecs @ np.diag(np.sqrt(eigvals)) @ eigvecs.T
-
-    # Generate independent traits
-    Z = rng.randn(n_species, n_genes)
-
-    # Apply phylogenetic correlation
-    X = L @ Z
-
-    # Generate causal DAG
-    W_true = np.zeros((n_genes, n_genes))
-    edges_true = []
-    for _ in range(n_causal):
-        i, j = rng.randint(0, n_genes, 2)
-        if i != j and i < j and W_true[i, j] == 0:
-            w = rng.uniform(0.5, causal_strength) * rng.choice([-1, 1])
-            W_true[i, j] = w
-            edges_true.append((i, j))
-
-    # Apply causal effects
-    for (i, j) in edges_true:
-        X[:, j] += W_true[i, j] * X[:, i]
-
-    # Add small noise
-    X += 0.05 * rng.randn(n_species, n_genes)
-
-    # Normalize
-    X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-8)
-
-    return X.astype(np.float32), W_true, edges_true
+    raise NotImplementedError(
+        'generate_realistic_evo_data was removed: its covariance ignored the tree. '
+        'Use run_revision.simulate.')
 
 
-# ================================================================
-# Test
-# ================================================================
 if __name__ == "__main__":
-    print("=== Felsenstein PIC: Build & Test ===\n")
-
-    # 1. Build tree
-    tree, name_to_idx, species = build_vertebrate_tree()
-    print(f"1. Vertebrate tree: {len(species)} species")
-    print(f"   Species: {species}")
-
-    # Count tips
-    def count_tips(node):
-        if node.is_tip:
-            return 1
-        return sum(count_tips(c) for c in node.children)
-
-    n_tips = count_tips(tree)
-    print(f"   Tips: {n_tips}")
-
-    # 2. Generate data
-    print(f"\n2. Generating realistic data...")
-    X, W_true, edges_true = generate_realistic_evo_data(
-        tree, species, n_genes=200, n_causal=30,
-        phylo_signal=0.3, causal_strength=2.0, seed=42
-    )
-    print(f"   X: {X.shape}, True edges: {len(edges_true)}")
-
-    # 3. Compute PIC
-    print(f"\n3. Computing full Felsenstein PIC...")
-    contrasts = felsenstein_pic(X, tree)
-    print(f"   Contrasts: {contrasts.shape}")
-    print(f"   Expected: ({n_tips-1}, 200)")
-
-    # 4. Diagnostic: check correlation structure
-    C_raw = np.corrcoef(X.T)
-    offdiag_raw = C_raw[np.triu(np.ones((200, 200)), 1).astype(bool)]
-    print(f"\n4. Diagnostic:")
-    print(f"   Raw mean abs corr: {np.abs(offdiag_raw).mean():.4f}")
-    print(f"   Raw std corr: {offdiag_raw.std():.4f}")
-
-    C_pic = np.corrcoef(contrasts.T)
-    offdiag_pic = C_pic[np.triu(np.ones((200, 200)), 1).astype(bool)]
-    print(f"   PIC mean abs corr: {np.abs(offdiag_pic).mean():.4f}")
-    print(f"   PIC std corr: {offdiag_pic.std():.4f}")
-
-    # 5. Check if true edges have distinguishable correlations in PIC space
-    true_corrs = []
-    for i, j in edges_true:
-        if i < 200 and j < 200:
-            c = np.corrcoef(contrasts[:, i], contrasts[:, j])[0, 1]
-            true_corrs.append(abs(c))
-    print(f"\n5. True edge corr in PIC space: mean={np.mean(true_corrs):.4f}, "
-          f"vs background mean={np.abs(offdiag_pic).mean():.4f}")
+    print("PIC module: use run_revision.py for a runnable demo.")

@@ -1,0 +1,38 @@
+{
+ "lam0.0": {
+  "lam": 0.0,
+  "auroc_notears": 0.757,
+  "auroc_corr": 0.998,
+  "sec": 39.6
+ },
+ "lam0.5": {
+  "lam": 0.5,
+  "auroc_notears": 0.756,
+  "auroc_corr": 0.999,
+  "sec": 27.5
+ },
+ "lam1.0": {
+  "lam": 1.0,
+  "auroc_notears": 0.848,
+  "auroc_corr": 0.998,
+  "sec": 31.1
+ },
+ "lam1.5": {
+  "lam": 1.5,
+  "auroc_notears": 0.847,
+  "auroc_corr": 0.991,
+  "sec": 27.9
+ },
+ "lam2.0": {
+  "lam": 2.0,
+  "auroc_notears": 0.867,
+  "auroc_corr": 0.952,
+  "sec": 21.7
+ },
+ "lam3.0": {
+  "lam": 3.0,
+  "auroc_notears": 0.83,
+  "auroc_corr": 0.849,
+  "sec": 22.8
+ }
+}

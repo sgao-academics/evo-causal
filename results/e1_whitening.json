@@ -1,0 +1,15 @@
+{
+ "BM": {
+  "mean_offdiag": 0.0,
+  "max_offdiag": 0.0
+ },
+ "OU_alpha3": {
+  "mean_offdiag": 0.00193,
+  "max_offdiag": 0.07188
+ },
+ "OU_alpha10": {
+  "mean_offdiag": 0.00196,
+  "max_offdiag": 0.07972
+ },
+ "interpretation": "For the covariance PIC actually assumes (BM) the off-diagonal leakage is ~0; for a mismatched process it is not. This is the implementation check, not a biological result."
+}

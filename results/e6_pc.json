@@ -1,0 +1,62 @@
+{
+ "d15_lam0.0": {
+  "d": 15,
+  "lam": 0.0,
+  "alpha": 0.05,
+  "f1_pc": 0.69,
+  "skeleton_size": 17.3,
+  "true_edges": 10,
+  "f1_pic_corr": 0.8,
+  "sec": 0.9
+ },
+ "d15_lam1.0": {
+  "d": 15,
+  "lam": 1.0,
+  "alpha": 0.05,
+  "f1_pc": 0.6849,
+  "skeleton_size": 18.3,
+  "true_edges": 10,
+  "f1_pic_corr": 0.8667,
+  "sec": 0.3
+ },
+ "d15_lam2.0": {
+  "d": 15,
+  "lam": 2.0,
+  "alpha": 0.05,
+  "f1_pc": 0.56,
+  "skeleton_size": 18.7,
+  "true_edges": 10,
+  "f1_pic_corr": 0.7333,
+  "sec": 0.3
+ },
+ "d30_lam0.0": {
+  "d": 30,
+  "lam": 0.0,
+  "alpha": 0.05,
+  "f1_pc": 0.3756,
+  "skeleton_size": 41.7,
+  "true_edges": 10,
+  "f1_pic_corr": 0.8667,
+  "sec": 0.7
+ },
+ "d30_lam1.0": {
+  "d": 30,
+  "lam": 1.0,
+  "alpha": 0.05,
+  "f1_pc": 0.3901,
+  "skeleton_size": 41.3,
+  "true_edges": 10,
+  "f1_pic_corr": 0.8667,
+  "sec": 0.8
+ },
+ "d30_lam2.0": {
+  "d": 30,
+  "lam": 2.0,
+  "alpha": 0.05,
+  "f1_pc": 0.3613,
+  "skeleton_size": 43.7,
+  "true_edges": 10,
+  "f1_pic_corr": 0.6,
+  "sec": 1.4
+ }
+}

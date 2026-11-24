@@ -1,0 +1,42 @@
+{
+ "d30_lam0.0": {
+  "d": 30,
+  "lam": 0.0,
+  "notears_on_pic": 0.4667,
+  "notears_on_raw": 0.4333,
+  "pic_corr": 0.9,
+  "h_final_mean": 2.229e-09,
+  "rule": "top-k, k = number of true edges",
+  "sec": 53.9
+ },
+ "d30_lam2.0": {
+  "d": 30,
+  "lam": 2.0,
+  "notears_on_pic": 0.5667,
+  "notears_on_raw": 0.4333,
+  "pic_corr": 0.6,
+  "h_final_mean": 2.622e-09,
+  "rule": "top-k, k = number of true edges",
+  "sec": 94.9
+ },
+ "d50_lam0.0": {
+  "d": 50,
+  "lam": 0.0,
+  "notears_on_pic": 0.6,
+  "notears_on_raw": 0.5,
+  "pic_corr": 0.9333,
+  "h_final_mean": 4.366e-09,
+  "rule": "top-k, k = number of true edges",
+  "sec": 122.9
+ },
+ "d50_lam2.0": {
+  "d": 50,
+  "lam": 2.0,
+  "notears_on_pic": 0.4333,
+  "notears_on_raw": 0.2333,
+  "pic_corr": 0.3667,
+  "h_final_mean": 6.609e-09,
+  "rule": "top-k, k = number of true edges",
+  "sec": 145.0
+ }
+}

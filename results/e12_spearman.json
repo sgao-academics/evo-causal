@@ -1,0 +1,110 @@
+{
+ "lam0.0_laplace": {
+  "pearson": 0.8667,
+  "spearman": 0.9,
+  "auc_pearson": 0.9984,
+  "auc_spearman": 0.9994,
+  "lam": 0.0,
+  "noise": "laplace",
+  "sec": 0.1
+ },
+ "lam0.0_gauss": {
+  "pearson": 0.9,
+  "spearman": 0.9333,
+  "auc_pearson": 0.9994,
+  "auc_spearman": 0.9998,
+  "lam": 0.0,
+  "noise": "gauss",
+  "sec": 0.1
+ },
+ "lam0.5_laplace": {
+  "pearson": 0.9,
+  "spearman": 1.0,
+  "auc_pearson": 0.9991,
+  "auc_spearman": 1.0,
+  "lam": 0.5,
+  "noise": "laplace",
+  "sec": 0.2
+ },
+ "lam0.5_gauss": {
+  "pearson": 0.9333,
+  "spearman": 0.9333,
+  "auc_pearson": 0.9986,
+  "auc_spearman": 0.9998,
+  "lam": 0.5,
+  "noise": "gauss",
+  "sec": 0.2
+ },
+ "lam1.0_laplace": {
+  "pearson": 0.8667,
+  "spearman": 0.8333,
+  "auc_pearson": 0.9984,
+  "auc_spearman": 0.9955,
+  "lam": 1.0,
+  "noise": "laplace",
+  "sec": 0.2
+ },
+ "lam1.0_gauss": {
+  "pearson": 0.8667,
+  "spearman": 0.8,
+  "auc_pearson": 0.9976,
+  "auc_spearman": 0.9825,
+  "lam": 1.0,
+  "noise": "gauss",
+  "sec": 0.2
+ },
+ "lam1.5_laplace": {
+  "pearson": 0.7667,
+  "spearman": 0.5333,
+  "auc_pearson": 0.9911,
+  "auc_spearman": 0.9358,
+  "lam": 1.5,
+  "noise": "laplace",
+  "sec": 0.2
+ },
+ "lam1.5_gauss": {
+  "pearson": 0.7333,
+  "spearman": 0.6,
+  "auc_pearson": 0.9784,
+  "auc_spearman": 0.9471,
+  "lam": 1.5,
+  "noise": "gauss",
+  "sec": 0.2
+ },
+ "lam2.0_laplace": {
+  "pearson": 0.6,
+  "spearman": 0.3667,
+  "auc_pearson": 0.9521,
+  "auc_spearman": 0.8379,
+  "lam": 2.0,
+  "noise": "laplace",
+  "sec": 0.2
+ },
+ "lam2.0_gauss": {
+  "pearson": 0.6,
+  "spearman": 0.5,
+  "auc_pearson": 0.9368,
+  "auc_spearman": 0.875,
+  "lam": 2.0,
+  "noise": "gauss",
+  "sec": 0.2
+ },
+ "lam3.0_laplace": {
+  "pearson": 0.3,
+  "spearman": 0.2333,
+  "auc_pearson": 0.8487,
+  "auc_spearman": 0.6876,
+  "lam": 3.0,
+  "noise": "laplace",
+  "sec": 0.2
+ },
+ "lam3.0_gauss": {
+  "pearson": 0.3333,
+  "spearman": 0.2,
+  "auc_pearson": 0.825,
+  "auc_spearman": 0.7148,
+  "lam": 3.0,
+  "noise": "gauss",
+  "sec": 0.2
+ }
+}

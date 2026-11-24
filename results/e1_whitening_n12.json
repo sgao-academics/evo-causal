@@ -1,0 +1,17 @@
+{
+ "n": 12,
+ "tree_seed": 11,
+ "tree_height": 3.4019,
+ "BM": {
+  "mean_offdiag": 0.0,
+  "max_offdiag": 0.0
+ },
+ "OU_alpha3": {
+  "mean_offdiag": 0.00622,
+  "max_offdiag": 0.08293
+ },
+ "OU_alpha10": {
+  "mean_offdiag": 0.00861,
+  "max_offdiag": 0.11301
+ }
+}

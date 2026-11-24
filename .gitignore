@@ -1,32 +1,42 @@
-# Manuscript (NOT included in replication repo)
+# ---------------------------------------------------------------------------
+# The manuscript and the figures are NOT part of the replication package.
+# They are generated from the files that are tracked here, so shipping them
+# would only create a second copy that can fall out of date.
+# ---------------------------------------------------------------------------
 paper/
 manuscript/
+figures/
+LaTeX_Source*.zip
+Manuscript.pdf
 *.pdf
+*.png
 *.tex
 *.docx
 
-# Build artifacts
+# ---------------------------------------------------------------------------
+# Internal working material: notes, correspondence, archived scripts.
+# Never published.
+# ---------------------------------------------------------------------------
+revision/
+scripts/_attic/
+notebooks/
+/*.md
+!/README.md
+*.zip
+
+# ---------------------------------------------------------------------------
+# Build artefacts and run logs
+# ---------------------------------------------------------------------------
 __pycache__/
 *.pyc
 *.pyo
 *.log
 *.aux
 *.out
+*.npz.tmp
 
-# Packaging
-Replication_Package.zip
-LaTeX_Source.zip
-_pkg_tmp/
-_rep_test/
-_verify/
-
-# Notebooks
-notebooks/
-
-# Temporary scripts
-scripts/_fix_paths.py
-scripts/figures/_fix_paths.py
-
+# ---------------------------------------------------------------------------
 # OS
+# ---------------------------------------------------------------------------
 .DS_Store
 Thumbs.db

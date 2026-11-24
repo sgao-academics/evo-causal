@@ -1,0 +1,7 @@
+# Tested with Python 3.12.13.
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+# Pinned: the PC and FCI entry points and the graph object's node labels are what
+# the analysis relies on, and they have moved between releases.
+causal-learn==0.1.4.8
