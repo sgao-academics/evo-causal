@@ -32,6 +32,8 @@ STAGES = [
     ('E17    concentration of the admitted set', 'e16b_hub.py'),
     ('E20    four procedures, ten seeds', 'e23_families10.py'),
     ('E21    rank-one residual search, archived trial', 'e21_lrsem.py'),
+    ('E25    the ADMG family, maximum likelihood with bidirected edges', 'exp_admg.py'),
+    ('E26    real traits on the real synthesis tree', 'exp_real.py'),
 ]
 
 FIGURES = ['make_fig1.py', 'make_fig2_fig4_fig5.py', 'make_fig3.py',
@@ -63,6 +65,8 @@ EXPECTED = {
     'e18_k_vs_n.json': 10,
     'e19_precision_recall.json': 30,
     'e21_lrsem.json': 2,
+    'e25_admg.json': 12,
+    'e26_real.json': 3,
     'e22_seed_spread.json': 5,
     'e23_families10.json': 6,
 }

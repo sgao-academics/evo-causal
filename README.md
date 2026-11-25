@@ -202,3 +202,28 @@ data-generating model and its conclusions differ from the ones here.
 
 Shuaidong Gao — Chongqing Institute of Foreign Studies, Chongqing 401420, China
 <gaoshuaidong@stu.cqifs.edu.cn> — ORCID 0009-0004-5641-3581
+
+
+## Third round: a fifth family, and real data
+
+Two blocks were added after the second round, and both are reproduced by the same driver.
+
+`exp_admg.py` (E25) runs a search over acyclic directed mixed graphs: a bidirected edge is a
+latent common cause that has been integrated out, and the likelihood is the one RICF solves
+(Drton, Fox & Wang 2019). The estimator is a direct L-BFGS minimisation of that likelihood with
+an analytic gradient, checked against a closed-form case (`python scripts/admg.py` prints the
+recovery and the gradient check). The search runs in three stages: forward addition then
+backward deletion and reversal of directed edges, scored in closed form by OLS, then bidirected
+edges admitted where the stage-two residuals stay correlated. Twelve cells, three seeds.
+
+`exp_real.py` (E26) measures three real comparative matrices. Traits come from PanTHERIA
+(Jones et al. 2009) and the topology from the Open Tree of Life synthesis (Hinchliff et al.
+2015), pruned to the species with a complete trait vector; branch lengths are Grafen's, and the
+block re-runs with equal branch lengths as a sensitivity check. The null column is independent
+Brownian motion on the same tree.
+
+`fetch_real.py` downloads PanTHERIA and asks the Open Tree API for the synthesis subtree of
+Mammalia; both land in `data/`. The two files it produces are small enough to ship, so
+`--check` works offline, and the script is only needed if the data must be rebuilt from source.
+
+Registered result files: `results/e25_admg.json`, `results/e26_real.json`.

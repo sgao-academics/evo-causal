@@ -1,0 +1,178 @@
+{
+ "ecology": {
+  "block": "ecology",
+  "n": 919,
+  "d": 6,
+  "K": [
+   2.521,
+   0.556,
+   1.084,
+   0.753,
+   0.38,
+   0.93
+  ],
+  "K_mean": 1.037,
+  "K_median": 0.841,
+  "K_min": 0.38,
+  "K_max": 2.521,
+  "K_over_0p30": 6,
+  "r": 2.284,
+  "lambda1": 1.88,
+  "r_null_mean": 1.613,
+  "r_null_sd": 0.2,
+  "r_null_q95": 1.941,
+  "r_z": 3.35,
+  "tetrad_reject": 0.6,
+  "tetrad_reject_null": 0.2,
+  "tetrad_n": 15,
+  "grafen": true,
+  "cols": [
+   "5-1_AdultBodyMass_g",
+   "12-1_HabitatBreadth",
+   "12-2_Terrestriality",
+   "15-1_LitterSize",
+   "6-1_DietBreadth",
+   "6-2_TrophicLevel"
+  ],
+  "labels": [
+   "adult body mass (g)",
+   "habitat breadth",
+   "terrestriality",
+   "litter size",
+   "diet breadth",
+   "trophic level"
+  ],
+  "logged": [
+   "5-1_AdultBodyMass_g"
+  ],
+  "sensitivity_equal_lengths": {
+   "r": 2.284,
+   "r_z": 0.83,
+   "K_mean": 0.623,
+   "tetrad_reject": 0.6
+  }
+ },
+ "range_climate": {
+  "block": "range_climate",
+  "n": 2651,
+  "d": 12,
+  "K": [
+   0.184,
+   0.509,
+   0.555,
+   0.808,
+   0.89,
+   0.899,
+   0.262,
+   0.336,
+   0.325,
+   0.319,
+   0.369,
+   0.165
+  ],
+  "K_mean": 0.468,
+  "K_median": 0.353,
+  "K_min": 0.165,
+  "K_max": 0.899,
+  "K_over_0p30": 9,
+  "r": 4.866,
+  "lambda1": 3.68,
+  "r_null_mean": 2.414,
+  "r_null_sd": 0.464,
+  "r_null_q95": 3.271,
+  "r_z": 5.29,
+  "tetrad_reject": 0.844,
+  "tetrad_reject_null": 0.574,
+  "tetrad_n": 495,
+  "grafen": true,
+  "cols": [
+   "26-1_GR_Area_km2",
+   "26-2_GR_MaxLat_dd",
+   "26-3_GR_MinLat_dd",
+   "26-6_GR_MinLong_dd",
+   "26-7_GR_MRLong_dd",
+   "26-5_GR_MaxLong_dd",
+   "27-2_HuPopDen_Mean_n/km2",
+   "28-1_Precip_Mean_mm",
+   "28-2_Temp_Mean_01degC",
+   "30-1_AET_Mean_mm",
+   "30-2_PET_Mean_mm",
+   "27-4_HuPopDen_Change"
+  ],
+  "labels": [
+   "range area (km2)",
+   "max latitude of range",
+   "min latitude of range",
+   "min longitude of range",
+   "mean longitude of range",
+   "span of longitude",
+   "mean human population density",
+   "mean precipitation (mm)",
+   "mean temperature (0.1 C)",
+   "actual evapotranspiration (mm)",
+   "potential evapotranspiration (mm)",
+   "change in human population density"
+  ],
+  "logged": [
+   "26-1_GR_Area_km2",
+   "27-2_HuPopDen_Mean_n/km2",
+   "28-1_Precip_Mean_mm",
+   "30-1_AET_Mean_mm"
+  ],
+  "sensitivity_equal_lengths": {
+   "r": 4.866,
+   "r_z": 1.73,
+   "K_mean": 0.253,
+   "tetrad_reject": 0.844
+  }
+ },
+ "life_history": {
+  "block": "life_history",
+  "n": 465,
+  "d": 4,
+  "K": [
+   2.6,
+   3.973,
+   1.239,
+   0.928
+  ],
+  "K_mean": 2.185,
+  "K_median": 1.919,
+  "K_min": 0.928,
+  "K_max": 3.973,
+  "K_over_0p30": 4,
+  "r": 8.622,
+  "lambda1": 2.97,
+  "r_null_mean": 1.479,
+  "r_null_sd": 0.207,
+  "r_null_q95": 1.812,
+  "r_z": 34.55,
+  "tetrad_reject": 1.0,
+  "tetrad_reject_null": 0.0,
+  "tetrad_n": 1,
+  "grafen": true,
+  "cols": [
+   "5-1_AdultBodyMass_g",
+   "9-1_GestationLen_d",
+   "17-1_MaxLongevity_m",
+   "15-1_LitterSize"
+  ],
+  "labels": [
+   "adult body mass (g)",
+   "gestation length (d)",
+   "maximum longevity (mo)",
+   "litter size"
+  ],
+  "logged": [
+   "5-1_AdultBodyMass_g",
+   "9-1_GestationLen_d",
+   "17-1_MaxLongevity_m"
+  ],
+  "sensitivity_equal_lengths": {
+   "r": 8.622,
+   "r_z": 19.67,
+   "K_mean": 2.002,
+   "tetrad_reject": 1.0
+  }
+ }
+}
