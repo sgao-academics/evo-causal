@@ -87,7 +87,9 @@ def real5():
            'the traits are related. The raw $p$ is one-sided against the graph reference; the next '
            'column adjusts it by Holm over the fifteen tests (five blocks by three leading ratios). '
            'The final column names the variable a top-$d$ ranking collapses onto, with its degree '
-           'and the share of admitted edges incident to it.')
+           'and the share of admitted edges incident to it. Probabilities carry four decimals '
+           'because the reference uses five thousand draws: $0.0002$ is its resolution limit, not '
+           'a measured value.')
     L = [r'\caption{%s}' % cap, r'\label{tab:real}', r'\footnotesize',
          r'\setlength{\tabcolsep}{4.5pt}',
          r'\begin{tabular}{@{}lrrrrrrcrrl@{}}', r'\toprule',
@@ -101,7 +103,7 @@ def real5():
             continue
         hub = SHORT.get(v['hub']['top_label'].replace('%', '\\%'), v['hub']['top_label'])
         ph = holes.get('%s:r1' % key, {})
-        L.append(r'%s (%s) & %d & %d & %.2f & %.2f & %d & %.2f & %.3f & %.3f & %s (%d, %.2f) \\'
+        L.append(r'%s (%s) & %d & %d & %.2f & %.2f & %d & %.2f & %.4f & %.4f & %s (%d, %.2f) \\'
                  % (key.replace('_', ' '), clade, v['n'], v['d'], v['K_mean'],
                     v['contrast']['r'][0], b['k'], b['null_mean'][0], ph.get('p', np.nan),
                     ph.get('holm', np.nan), esc(hub), v['hub']['top_deg'], v['hub']['share']))

@@ -27,7 +27,11 @@ from run_revision import make_dag
 from fetch_real import read_pantheria
 
 DATA = os.path.join(os.path.dirname(S), 'data')
-NDRAW = 500
+# 5,000 draws rather than 500: with Holm over fifteen tests the smallest attainable p-value with
+# 500 draws is 1/501 = 0.002, which sits a hair under 0.05/15. A null that cannot express a
+# smaller probability cannot be corrected, so the resolution had to rise before the correction
+# meant anything.
+NDRAW = 5000
 
 
 def corr_of(M):

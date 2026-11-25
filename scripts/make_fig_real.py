@@ -83,7 +83,7 @@ def main():
         ax.plot([b['null_mean'][0]], [i], marker='|', ms=13, mew=1.3, color=LILAC, zorder=2)
         ax.plot([b['obs'][0]], [i], 'o', ms=6, mfc=COLOR[k], mec='white', mew=0.7, zorder=3)
         ph = H['holes'].get('%s:r1' % k, {})
-        ax.annotate('%.2f' % ph.get('holm', np.nan),
+        ax.annotate('%.3f' % ph.get('holm', np.nan),
                     (max(b['obs'][0], b['null_mean'][0]) + 0.16, i),
                     va='center', ha='left', fontsize=6.6,
                     color=INK if ph.get('survives') else GREY,

@@ -95,6 +95,7 @@ ALLOWED = {
     '2.21': 'null mean, re-drawn: now 2.22',
     '2.31': 'null mean, re-drawn: now 2.30',
     '2.35': 'null mean, re-drawn: now 2.34',
+    '2.29': 'null mean of the bird-niche block, re-drawn at 5000 draws: now 2.31',
     '0.39': 'null sd, now stated from the JSON',
     '0.40': 'range end of the damage window, compressed',
     '0.41': 'null sd, now stated from the JSON',
@@ -142,14 +143,19 @@ for key in ('life_history', 'range_climate'):
     b = H['blocks'][key]
     needle = '%.2f \\pm %.2f' % (b['null_mean'][0], b['null_sd'][0])
     chk('prose quotes the null spread of %s' % key, needle in main, needle)
-    chk('prose quotes the raw p of %s' % key, ('p = %.3f' % b['p'][0]) in main,
-        '%.3f' % b['p'][0])
+    # the null cannot resolve below 1/(draws+1), and the prose says so rather than printing it
+    if b['p'][0] <= 1.0 / 600:
+        chk('prose quotes the raw p of %s as below the resolution' % key,
+            'p < 1/5000' in main, '%.4f' % b['p'][0])
+    else:
+        chk('prose quotes the raw p of %s' % key, ('p = %.3f' % b['p'][0]) in main,
+            '%.3f' % b['p'][0])
 for key in ('life_history:r1', 'range_climate:r1'):
     chk('prose quotes the Holm value of %s' % key,
         ('%.3f' % H['holes'][key]['holm']) in main, '%.3f' % H['holes'][key]['holm'])
-chk('prose reports three of fifteen surviving', 'three of them standing' in main)
-chk('prose does not claim five of five exceed the reference',
-    'Two of five matrices' in main)
+chk('prose reports three of fifteen surviving', 'leaves three standing' in main)
+chk('prose distinguishes the two surviving blocks',
+    'The two surviving blocks are therefore of different kinds' in main)
 
 tf = read(os.path.join(PAPER, 'tab_families.tex'))
 for k in ('lam0.0', 'lam0.5', 'lam1.0', 'lam1.5', 'lam2.0', 'lam3.0'):
