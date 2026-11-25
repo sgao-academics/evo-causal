@@ -21,6 +21,14 @@ ROOT = os.path.dirname(S)
 PAPER = os.path.join(ROOT, 'paper')
 RES = os.path.join(ROOT, 'results')
 
+# the manuscripts are deliberately not part of this repository, so from a clean clone there is
+# nothing to audit; say so and stop rather than raising
+if not os.path.exists(os.path.join(PAPER, 'main_manuscript.tex')):
+    print('manuscripts not present beside this script: nothing to audit')
+    print('(this audit compares the split documents with the result files; run it from the')
+    print(' working directory that holds paper/ and results/)')
+    raise SystemExit(0)
+
 ok = fail = 0
 fails = []
 
