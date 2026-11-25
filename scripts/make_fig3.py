@@ -101,8 +101,8 @@ def main():
 
     print('fig3 ok')
     for r in rows:
-        print(f"  lam={r['lam']:.1f} K={r['K_measured']:.3f} corr={r['f1_corr']:.3f} "
-              f"NOTEARS={r['f1_notears']:.3f} PC={r['f1_pc']:.3f} FCI={r['f1_fci']:.3f}")
+        print(f"  lam={r['lam']:.1f} K={r['K']:.3f} corr={r['corr']:.3f} "
+              f"NOTEARS={r['notears']:.3f} PC={r['pc']:.3f} FCI={r['fci']:.3f}")
 
 
 def mixg(c, t):
