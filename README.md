@@ -239,7 +239,7 @@ Registered result files: `results/e25_admg.json`, `results/e26_real.json`.
 | `scripts/exp_graphnull.py` | updates `results/e26_real.json`, `results/e27_birds.json` | adds the sparse-random-DAG reference at the same n and d |
 | `scripts/exp_calib.py` | `results/e28_calib.json` | what the screen costs when the calibration graph is not the truth, and how many components must be removed |
 | `scripts/make_tables2.py` | the three new tables | renders them from the result files |
-| `scripts/audit_v4.py` | -- | checks every number in the new text and every cell of the new tables against the result files |
+| `scripts/audit_v4.py` | -- | checks every number in the new text and every cell of the new tables against the result files (needs the manuscript beside it; exits cleanly if absent) |
 
 The two fetchers need network access; everything after them runs offline from `data/`.
 `python scripts/audit_v4.py` prints one line per check and `OVERALL PASS` when the prose
