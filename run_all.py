@@ -39,6 +39,8 @@ STAGES = [
     ('E28    calibration audit and the multi-direction repair', 'exp_calib.py'),
     ('E29    nonlinear additive-noise family', 'exp_resit.py'),
     ('E30    Holm correction and preprocessing sensitivity', 'exp_holm.py'),
+    ('E31    the mammal blocks on a dated topology', 'exp_upham.py'),
+    ('E32    the k band, and thirty-seed intervals', 'exp_kband.py'),
 ]
 
 FIGURES = ['make_fig1.py', 'make_fig2_fig4_fig5.py', 'make_fig3.py',
@@ -78,6 +80,8 @@ EXPECTED = {
     'e28_calib.json': 31,
     'e29_resit.json': 6,
     'e30_holm.json': 3,
+    'e31_upham.json': 3,
+    'e32_kband.json': 12,
 }
 
 
@@ -192,6 +196,24 @@ def check():
             if v:
                 print('  E18 %s: order-free PPA %.3f (exact %.2f), contrasts %.3f'
                       % (lam, v['ppa_f1'], v['ppa_exact'], v['pic_f1']))
+
+    e31 = load('e31_upham.json') or {}
+    if e31:
+        for blk in ('life_history', 'range_climate'):
+            v = e31.get(blk, {})
+            if v:
+                print('  E31 %-14s A %.2f  B %.2f  C %.2f  (ref %.2f)' %
+                      (blk, v['open_tree_grafen'], v['upham_grafen'],
+                       v['upham_dated'], v['null']['mean']))
+
+    e32 = load('e32_kband.json') or {}
+    if e32:
+        for key in ('d30_lam0.0', 'd50_lam2.0'):
+            v = e32.get(key, {})
+            if v:
+                print('  E32 %-12s ' % key + ' '.join(
+                    'k=%s %.2f [%.2f,%.2f]' % (k, c['mean'], c['lo'], c['hi'])
+                    for k, c in sorted(v.items(), key=lambda kv: int(kv[0]))))
 
     print()
     if bad:

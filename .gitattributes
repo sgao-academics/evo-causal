@@ -1,0 +1,5 @@
+# The dated tree is a NEXUS file whose labels are parsed byte-wise; a line-ending
+# conversion would change its content and could break the tip labels.
+data/*.tre -text
+data/*.nwk -text
+*.json text eol=lf

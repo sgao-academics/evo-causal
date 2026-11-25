@@ -242,11 +242,19 @@ Registered result files: `results/e25_admg.json`, `results/e26_real.json`.
 | `scripts/audit_v4.py` | -- | checks every number in the new text and every cell of the new tables against the result files (needs the manuscript beside it; exits cleanly if absent) |
 
 The two fetchers need network access; everything after them runs offline from `data/`.
+
+`data/upham_mammals_mcc.tre` is shipped rather than fetched, because the empirical section's dated
+check (E31) is meaningless without it and the file is small: the completed 5,911-species MCC tree of
+Upham, Esselstyn and Jetz (2019), PLOS Biology, distributed under CC-BY with the paper's code
+(`n8upham/MamPhy_v1`, `_DATA/`). It is shipped unmodified; `exp_upham.py` re-downloads it if absent,
+so the archive works either way.
 `python scripts/audit_v4.py` prints one line per check and `OVERALL PASS` when the prose
 and the result files agree.
 
 | `exp_resit.py` | E29 | the nonlinear additive-noise family on the same grid |
 | `exp_holm.py` | E30 | Holm correction over the fifteen real-data tests, and the preprocessing sensitivities |
+| `exp_upham.py` | E31 | the mammal blocks on the dated Upham et al. (2019) tree, with the topology and the length convention separated, and the tip-error ladder; downloads `data/upham_mammals_mcc.tre` (4.4 MB) on first run |
+| `exp_kband.py` | E32 | the number of admitted edges varied by a factor of 1.5 either way, and thirty-seed percentile intervals |
 | `make_fig_real.py` | Fig. 5 | the five real matrices against the sparse-graph reference |
 | `make_fig_resit.py` | Fig. S3 | the nonlinear family against the two linear rules |
 | `audit_split.py` | -- | the split-submission audit (numbers, tables, limits, references); needs the manuscripts beside it |

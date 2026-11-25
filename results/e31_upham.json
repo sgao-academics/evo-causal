@@ -1,0 +1,95 @@
+{
+ "life_history": {
+  "n": 329,
+  "d": 6,
+  "n_open_tree": 600,
+  "join": 0.548,
+  "open_tree_grafen": 4.011,
+  "upham_grafen": 4.228,
+  "upham_dated": 2.434,
+  "tip_error_ladder": {
+   "0.00": 2.434,
+   "0.05": 2.748,
+   "0.10": 3.106,
+   "0.20": 3.683,
+   "0.30": 4.151,
+   "0.50": 4.927,
+   "1.00": 6.472,
+   "2.00": 8.524
+  },
+  "unwhitened": 11.283,
+  "p_open_tree_grafen": 0.0002,
+  "p_upham_grafen": 0.0002,
+  "p_upham_dated": 0.31694,
+  "null": {
+   "k": 2,
+   "mean": 2.272,
+   "sd": 0.393,
+   "draws": 5000
+  },
+  "delta_topology": 0.217,
+  "delta_dates": -1.794
+ },
+ "ecology": {
+  "n": 879,
+  "d": 6,
+  "n_open_tree": 1372,
+  "join": 0.641,
+  "open_tree_grafen": 1.467,
+  "upham_grafen": 1.445,
+  "upham_dated": 1.872,
+  "tip_error_ladder": {
+   "0.00": 1.872,
+   "0.05": 1.6,
+   "0.10": 1.473,
+   "0.20": 1.447,
+   "0.30": 1.431,
+   "0.50": 1.448,
+   "1.00": 1.56,
+   "2.00": 1.702
+  },
+  "unwhitened": 2.271,
+  "p_open_tree_grafen": 1.0,
+  "p_upham_grafen": 1.0,
+  "p_upham_dated": 0.87922,
+  "null": {
+   "k": 2,
+   "mean": 2.244,
+   "sd": 0.395,
+   "draws": 5000
+  },
+  "delta_topology": -0.022,
+  "delta_dates": 0.427
+ },
+ "range_climate": {
+  "n": 2549,
+  "d": 12,
+  "n_open_tree": 3486,
+  "join": 0.731,
+  "open_tree_grafen": 3.514,
+  "upham_grafen": 3.677,
+  "upham_dated": 3.703,
+  "tip_error_ladder": {
+   "0.00": 3.703,
+   "0.05": 3.634,
+   "0.10": 3.621,
+   "0.20": 3.608,
+   "0.30": 3.618,
+   "0.50": 3.774,
+   "1.00": 4.123,
+   "2.00": 4.54
+  },
+  "unwhitened": 4.831,
+  "p_open_tree_grafen": 0.021,
+  "p_upham_grafen": 0.011,
+  "p_upham_dated": 0.0108,
+  "null": {
+   "k": 4,
+   "mean": 2.383,
+   "sd": 0.44,
+   "draws": 5000
+  },
+  "delta_topology": 0.163,
+  "delta_dates": 0.026
+ }
+}
