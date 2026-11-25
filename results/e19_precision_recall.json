@@ -1,0 +1,242 @@
+{
+ "dose_d30_lam0.00": {
+  "d": 30,
+  "lam": 0.0,
+  "precision": 0.8667,
+  "recall": 0.8667,
+  "f1": 0.8667,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam0.25": {
+  "d": 30,
+  "lam": 0.25,
+  "precision": 0.9,
+  "recall": 0.9,
+  "f1": 0.9,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam0.50": {
+  "d": 30,
+  "lam": 0.5,
+  "precision": 0.9,
+  "recall": 0.9,
+  "f1": 0.9,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam1.00": {
+  "d": 30,
+  "lam": 1.0,
+  "precision": 0.8667,
+  "recall": 0.8667,
+  "f1": 0.8667,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam1.50": {
+  "d": 30,
+  "lam": 1.5,
+  "precision": 0.7667,
+  "recall": 0.7667,
+  "f1": 0.7667,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam2.00": {
+  "d": 30,
+  "lam": 2.0,
+  "precision": 0.6,
+  "recall": 0.6,
+  "f1": 0.6,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam3.00": {
+  "d": 30,
+  "lam": 3.0,
+  "precision": 0.3,
+  "recall": 0.3,
+  "f1": 0.3,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam4.00": {
+  "d": 30,
+  "lam": 4.0,
+  "precision": 0.1667,
+  "recall": 0.1667,
+  "f1": 0.1667,
+  "skeleton": 10.0
+ },
+ "dose_d30_lam6.00": {
+  "d": 30,
+  "lam": 6.0,
+  "precision": 0.1,
+  "recall": 0.1,
+  "f1": 0.1,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam0.00": {
+  "d": 50,
+  "lam": 0.0,
+  "precision": 0.8667,
+  "recall": 0.8667,
+  "f1": 0.8667,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam0.25": {
+  "d": 50,
+  "lam": 0.25,
+  "precision": 0.8667,
+  "recall": 0.8667,
+  "f1": 0.8667,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam0.50": {
+  "d": 50,
+  "lam": 0.5,
+  "precision": 0.8667,
+  "recall": 0.8667,
+  "f1": 0.8667,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam1.00": {
+  "d": 50,
+  "lam": 1.0,
+  "precision": 0.7333,
+  "recall": 0.7333,
+  "f1": 0.7333,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam1.50": {
+  "d": 50,
+  "lam": 1.5,
+  "precision": 0.6,
+  "recall": 0.6,
+  "f1": 0.6,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam2.00": {
+  "d": 50,
+  "lam": 2.0,
+  "precision": 0.4667,
+  "recall": 0.4667,
+  "f1": 0.4667,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam3.00": {
+  "d": 50,
+  "lam": 3.0,
+  "precision": 0.1333,
+  "recall": 0.1333,
+  "f1": 0.1333,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam4.00": {
+  "d": 50,
+  "lam": 4.0,
+  "precision": 0.0333,
+  "recall": 0.0333,
+  "f1": 0.0333,
+  "skeleton": 10.0
+ },
+ "dose_d50_lam6.00": {
+  "d": 50,
+  "lam": 6.0,
+  "precision": 0.0,
+  "recall": 0.0,
+  "f1": 0.0,
+  "skeleton": 10.0
+ },
+ "fam_d30_lam0.0_pc": {
+  "lam": 0.0,
+  "method": "pc",
+  "precision": 0.2336,
+  "recall": 0.9667,
+  "f1": 0.3756,
+  "skeleton": 41.7
+ },
+ "fam_d30_lam0.0_fci": {
+  "lam": 0.0,
+  "method": "fci",
+  "precision": 0.2336,
+  "recall": 0.9667,
+  "f1": 0.3756,
+  "skeleton": 41.7
+ },
+ "fam_d30_lam0.5_pc": {
+  "lam": 0.5,
+  "method": "pc",
+  "precision": 0.246,
+  "recall": 1.0,
+  "f1": 0.3943,
+  "skeleton": 41.0
+ },
+ "fam_d30_lam0.5_fci": {
+  "lam": 0.5,
+  "method": "fci",
+  "precision": 0.246,
+  "recall": 1.0,
+  "f1": 0.3943,
+  "skeleton": 41.0
+ },
+ "fam_d30_lam1.0_pc": {
+  "lam": 1.0,
+  "method": "pc",
+  "precision": 0.2424,
+  "recall": 1.0,
+  "f1": 0.3901,
+  "skeleton": 41.3
+ },
+ "fam_d30_lam1.0_fci": {
+  "lam": 1.0,
+  "method": "fci",
+  "precision": 0.2446,
+  "recall": 1.0,
+  "f1": 0.3929,
+  "skeleton": 41.0
+ },
+ "fam_d30_lam1.5_pc": {
+  "lam": 1.5,
+  "method": "pc",
+  "precision": 0.2316,
+  "recall": 1.0,
+  "f1": 0.3758,
+  "skeleton": 43.3
+ },
+ "fam_d30_lam1.5_fci": {
+  "lam": 1.5,
+  "method": "fci",
+  "precision": 0.2332,
+  "recall": 1.0,
+  "f1": 0.378,
+  "skeleton": 43.0
+ },
+ "fam_d30_lam2.0_pc": {
+  "lam": 2.0,
+  "method": "pc",
+  "precision": 0.2223,
+  "recall": 0.9667,
+  "f1": 0.3613,
+  "skeleton": 43.7
+ },
+ "fam_d30_lam2.0_fci": {
+  "lam": 2.0,
+  "method": "fci",
+  "precision": 0.2286,
+  "recall": 0.9667,
+  "f1": 0.3697,
+  "skeleton": 42.3
+ },
+ "fam_d30_lam3.0_pc": {
+  "lam": 3.0,
+  "method": "pc",
+  "precision": 0.195,
+  "recall": 0.8667,
+  "f1": 0.3181,
+  "skeleton": 44.7
+ },
+ "fam_d30_lam3.0_fci": {
+  "lam": 3.0,
+  "method": "fci",
+  "precision": 0.2004,
+  "recall": 0.8667,
+  "f1": 0.3255,
+  "skeleton": 43.3
+ }
+}

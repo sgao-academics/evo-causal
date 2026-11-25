@@ -1,0 +1,202 @@
+{
+ "null_d30": {
+  "n": 200,
+  "mean": 3.888,
+  "sd": 0.488,
+  "q05": 3.241,
+  "q50": 3.832,
+  "q95": 4.836,
+  "thr": 4.836,
+  "sec": 12.0
+ },
+ "none_d30_lv0.0": {
+  "latent": "none",
+  "d": 30,
+  "level": 0.0,
+  "seeds": 10,
+  "r": 3.763,
+  "fired": 0,
+  "thr": 4.836
+ },
+ "iid_d30_lv1.0": {
+  "latent": "iid",
+  "d": 30,
+  "level": 1.0,
+  "seeds": 10,
+  "r": 16.1,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "iid_d30_lv2.0": {
+  "latent": "iid",
+  "d": 30,
+  "level": 2.0,
+  "seeds": 10,
+  "r": 38.037,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "iid_d30_lv4.0": {
+  "latent": "iid",
+  "d": 30,
+  "level": 4.0,
+  "seeds": 10,
+  "r": 86.172,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "tree_d30_lv0.5": {
+  "latent": "tree",
+  "d": 30,
+  "level": 0.5,
+  "seeds": 10,
+  "r": 3.561,
+  "fired": 0,
+  "thr": 4.836
+ },
+ "tree_d30_lv1.0": {
+  "latent": "tree",
+  "d": 30,
+  "level": 1.0,
+  "seeds": 10,
+  "r": 3.7,
+  "fired": 0,
+  "thr": 4.836
+ },
+ "tree_d30_lv2.0": {
+  "latent": "tree",
+  "d": 30,
+  "level": 2.0,
+  "seeds": 10,
+  "r": 6.654,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "tree_d30_lv3.0": {
+  "latent": "tree",
+  "d": 30,
+  "level": 3.0,
+  "seeds": 10,
+  "r": 11.292,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "tree_d30_lv4.0": {
+  "latent": "tree",
+  "d": 30,
+  "level": 4.0,
+  "seeds": 10,
+  "r": 16.477,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "tree_d30_lv6.0": {
+  "latent": "tree",
+  "d": 30,
+  "level": 6.0,
+  "seeds": 10,
+  "r": 27.541,
+  "fired": 10,
+  "thr": 4.836
+ },
+ "null_d50": {
+  "n": 200,
+  "mean": 4.53,
+  "sd": 0.45,
+  "q05": 3.892,
+  "q50": 4.5,
+  "q95": 5.329,
+  "thr": 5.329,
+  "sec": 12.6
+ },
+ "none_d50_lv0.0": {
+  "latent": "none",
+  "d": 50,
+  "level": 0.0,
+  "seeds": 10,
+  "r": 4.67,
+  "fired": 1,
+  "thr": 5.329
+ },
+ "iid_d50_lv1.0": {
+  "latent": "iid",
+  "d": 50,
+  "level": 1.0,
+  "seeds": 10,
+  "r": 27.183,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "iid_d50_lv2.0": {
+  "latent": "iid",
+  "d": 50,
+  "level": 2.0,
+  "seeds": 10,
+  "r": 65.5,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "iid_d50_lv4.0": {
+  "latent": "iid",
+  "d": 50,
+  "level": 4.0,
+  "seeds": 10,
+  "r": 150.569,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "tree_d50_lv0.5": {
+  "latent": "tree",
+  "d": 50,
+  "level": 0.5,
+  "seeds": 10,
+  "r": 4.469,
+  "fired": 0,
+  "thr": 5.329
+ },
+ "tree_d50_lv1.0": {
+  "latent": "tree",
+  "d": 50,
+  "level": 1.0,
+  "seeds": 10,
+  "r": 4.967,
+  "fired": 2,
+  "thr": 5.329
+ },
+ "tree_d50_lv2.0": {
+  "latent": "tree",
+  "d": 50,
+  "level": 2.0,
+  "seeds": 10,
+  "r": 10.712,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "tree_d50_lv3.0": {
+  "latent": "tree",
+  "d": 50,
+  "level": 3.0,
+  "seeds": 10,
+  "r": 18.837,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "tree_d50_lv4.0": {
+  "latent": "tree",
+  "d": 50,
+  "level": 4.0,
+  "seeds": 10,
+  "r": 27.789,
+  "fired": 10,
+  "thr": 5.329
+ },
+ "tree_d50_lv6.0": {
+  "latent": "tree",
+  "d": 50,
+  "level": 6.0,
+  "seeds": 10,
+  "r": 46.867,
+  "fired": 10,
+  "thr": 5.329
+ }
+}

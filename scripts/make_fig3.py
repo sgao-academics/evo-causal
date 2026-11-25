@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Figure 3: four algorithm families on one grid, read from e11_families.json.
+"""Figure 3: four procedures on one grid, read from e23_families10.json (ten seeds).
 
 The previous version plotted FCI at 0.014-0.066, which was the consequence of a label
 off-by-one in the edge parser rather than a property of FCI. With the mapping fixed FCI
@@ -49,18 +49,18 @@ def letter(ax, s, dx=-0.155, dy=1.05):
 
 
 def main():
-    d = load('e11_families')
+    d = load('e23_families10')
     if not d:
-        raise SystemExit('e11_families.json missing')
+        raise SystemExit('e23_families10.json missing')
     rows = sorted(d.values(), key=lambda v: v['lam'])
     lam = [r['lam'] for r in rows]
-    K = [r['K_measured'] for r in rows]
+    K = [r['K'] for r in rows]
 
     series = [
-        ('f1_corr', 'PIC + correlation', PAL['mist'], 'o', '-', 1.5),
-        ('f1_notears', 'NOTEARS on PIC', PAL['moss'], 's', '-', 1.5),
-        ('f1_pc', 'PC on PIC', PAL['peri'], '^', '--', 2.0),
-        ('f1_fci', 'FCI on PIC', PAL['orchid'], 'D', ':', 1.6),
+        ('corr', 'corr_sd', 'PIC + correlation', PAL['mist'], 'o', '-', 1.5),
+        ('notears', 'notears_sd', 'NOTEARS on PIC', PAL['moss'], 's', '-', 1.5),
+        ('pc', 'pc_sd', 'PC on PIC', PAL['peri'], '^', '--', 2.0),
+        ('fci', 'fci_sd', 'FCI on PIC', PAL['orchid'], 'D', ':', 1.6),
     ]
 
     fig, axes = plt.subplots(1, 2, figsize=(FIGW, 2.62),
@@ -68,8 +68,10 @@ def main():
     fig.subplots_adjust(bottom=0.24)
     for ax, xx, xl in ((axes[0], K, "measured Blomberg's $K$"),
                        (axes[1], lam, r'generator loading $\lambda$')):
-        for key, lab, c, mk, ls, lw in series:
-            y = [r[key] if r.get(key) is not None else np.nan for r in rows]
+        for key, sdkey, lab, c, mk, ls, lw in series:
+            y = np.array([r[key] if r.get(key) is not None else np.nan for r in rows])
+            s = np.array([r.get(sdkey, 0.0) or 0.0 for r in rows])
+            ax.fill_between(xx, y - s, y + s, color=c, alpha=0.16, lw=0)
             ax.plot(xx, y, ls, marker=mk, ms=3.6, lw=lw, color=c, mfc='white',
                     mew=1.0, label=lab, zorder=3 if key in ('f1_corr', 'f1_notears') else 2)
         ax.set_xlabel(xl)

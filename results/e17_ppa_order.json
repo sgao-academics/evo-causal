@@ -1,0 +1,66 @@
+{
+ "dags": {
+  "full": 29281,
+  "restricted": 1141
+ },
+ "lam0.0_full": {
+  "lam": 0.0,
+  "regime": "full",
+  "seeds": 5,
+  "n_models": 29281,
+  "ppa_f1": 0.7557,
+  "ppa_exact": 0.0,
+  "pic_f1": 0.8,
+  "sec": 14.2
+ },
+ "lam0.0_restricted": {
+  "lam": 0.0,
+  "regime": "restricted",
+  "seeds": 5,
+  "n_models": 1141,
+  "ppa_f1": 0.5778,
+  "ppa_exact": 0.0,
+  "pic_f1": 0.8,
+  "sec": 0.7
+ },
+ "lam1.0_full": {
+  "lam": 1.0,
+  "regime": "full",
+  "seeds": 5,
+  "n_models": 29281,
+  "ppa_f1": 0.8023,
+  "ppa_exact": 0.0,
+  "pic_f1": 0.8667,
+  "sec": 12.9
+ },
+ "lam1.0_restricted": {
+  "lam": 1.0,
+  "regime": "restricted",
+  "seeds": 5,
+  "n_models": 1141,
+  "ppa_f1": 0.6667,
+  "ppa_exact": 0.0,
+  "pic_f1": 0.8667,
+  "sec": 0.7
+ },
+ "lam2.0_full": {
+  "lam": 2.0,
+  "regime": "full",
+  "seeds": 5,
+  "n_models": 29281,
+  "ppa_f1": 0.8609,
+  "ppa_exact": 0.2,
+  "pic_f1": 0.8,
+  "sec": 14.1
+ },
+ "lam2.0_restricted": {
+  "lam": 2.0,
+  "regime": "restricted",
+  "seeds": 5,
+  "n_models": 1141,
+  "ppa_f1": 0.6667,
+  "ppa_exact": 0.0,
+  "pic_f1": 0.8,
+  "sec": 0.7
+ }
+}

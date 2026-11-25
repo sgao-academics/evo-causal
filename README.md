@@ -132,6 +132,52 @@ handed; callers that need the tree afterwards must pass a fresh copy. The guard
 `_pic_consumed` makes a second call on the same tree raise instead of returning
 a silently wrong result.
 
+## The second round
+
+The manuscript's central claim is that the contaminating covariance is rank one. Four
+blocks test it and one tests what can be done about it; all are in `scripts/exp_new.py`
+and run in roughly 55 minutes on a laptop CPU.
+
+`e14_dissociation.json` — three data-generating arms that reach the same Blomberg's $K$
+by different routes: an independent Brownian component per trait (raises $K$, creates no
+cross-trait covariance), a latent factor that evolves on the tree, and a latent factor
+drawn as white noise (leaves $K$ at its null value, is fully confounding). This is what
+separates the signal statistic from the mechanism; without it the two are the same
+variable in this generator, because the traits carry no phylogenetic structure at
+$\lambda = 0$.
+
+`e15_screen.json`, `e15b_screen_signal.json`, `e15c_r_vs_n.json` — the screen
+$r = \lambda_1 / \overline{\lambda_{2..d}}$ of the contrast correlation matrix, with its
+null calibrated by simulation from the true DAG at the same $n$ and $d$: 200 draws per
+dimension for the null, ten seeds per cell for size and power. `e15c` shows why the null
+cannot be carried between datasets: at $\lambda = 0$, $r$ runs from 5.15 at $n = 100$ to
+2.49 at $n = 2000$.
+
+`e16_deflate.json`, `e16b_hub.json` — the repair, which is to subtract the leading
+eigencomponent of the contrast correlation matrix before ranking entries, plus the
+concentration of the admitted set that Corollary (ii) predicts.
+
+`e17_ppa_order.json` — path analysis under three candidate sets, including the
+29,281-DAG set that does *not* supply the generating order. The comparison in the earlier
+version of this study enumerated 1,024 DAGs over a fixed order which turned out to be the
+generating order, so part of the reported advantage was oracle information.
+
+`e19_precision_recall.json` — precision, recall and skeleton size for the methods that
+choose their own edge count. The two top-$k$ methods admit exactly $k$ entries, so their
+precision equals their recall equals their $F_1$ by construction and only $F_1$ is stored
+twice.
+
+`e23_families10.json` — the four procedures at ten seeds, because the three-seed spread of
+NOTEARS (a standard deviation of 0.18 at $\lambda = 0$) was comparable to the effect the
+three-seed grid attributed to confounding.
+
+`e21_lrsem.json`, `scripts/lrsem_trial.py` — the negative result behind one paragraph of
+the Discussion: a search whose residual covariance is modelled as rank one plus isotropic
+absorbs the leading direction of any covariance with a single factor and no edges, and
+returns $F_1 = 0.28$ at $\lambda = 0$ against 0.87 for the plain contrast rule.
+
+`make_fig6_fig7.py` draws the two figures added in this round from those files.
+
 ## Reproducibility checks performed
 
 * `_e1_n12.py` rerun against the archive: the regenerated

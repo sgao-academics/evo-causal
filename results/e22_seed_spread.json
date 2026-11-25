@@ -1,0 +1,57 @@
+{
+ "d30_lam0.0": {
+  "lam": 0.0,
+  "seeds": 10,
+  "corr_mean": 0.84,
+  "corr_sd": 0.097,
+  "corr_ci": 0.06,
+  "notears_mean": 0.48,
+  "notears_sd": 0.181,
+  "notears_ci": 0.112,
+  "sec": 148.5
+ },
+ "d30_lam1.0": {
+  "lam": 1.0,
+  "seeds": 10,
+  "corr_mean": 0.86,
+  "corr_sd": 0.084,
+  "corr_ci": 0.052,
+  "notears_mean": 0.68,
+  "notears_sd": 0.063,
+  "notears_ci": 0.039,
+  "sec": 98.3
+ },
+ "d30_lam2.0": {
+  "lam": 2.0,
+  "seeds": 10,
+  "corr_mean": 0.56,
+  "corr_sd": 0.171,
+  "corr_ci": 0.106,
+  "notears_mean": 0.56,
+  "notears_sd": 0.151,
+  "notears_ci": 0.093,
+  "sec": 80.5
+ },
+ "d30_lam3.0": {
+  "lam": 3.0,
+  "seeds": 10,
+  "corr_mean": 0.26,
+  "corr_sd": 0.165,
+  "corr_ci": 0.102,
+  "notears_mean": 0.48,
+  "notears_sd": 0.155,
+  "notears_ci": 0.096,
+  "sec": 63.3
+ },
+ "d30_lam4.0": {
+  "lam": 4.0,
+  "seeds": 10,
+  "corr_mean": 0.13,
+  "corr_sd": 0.116,
+  "corr_ci": 0.072,
+  "notears_mean": 0.47,
+  "notears_sd": 0.183,
+  "notears_ci": 0.113,
+  "sec": 64.1
+ }
+}
