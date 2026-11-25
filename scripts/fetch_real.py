@@ -37,11 +37,15 @@ BLOCKS = {
         ('6-1_DietBreadth', 'diet breadth'),
         ('6-2_TrophicLevel', 'trophic level'),
     ],
+    # widened from four traits to six: with four traits a matrix admits exactly one
+    # vanishing tetrad, so a tetrad rejection rate of 1.00 there is one test, not a rate
     'life_history': [
         ('5-1_AdultBodyMass_g', 'adult body mass (g)'),
         ('9-1_GestationLen_d', 'gestation length (d)'),
         ('17-1_MaxLongevity_m', 'maximum longevity (mo)'),
         ('15-1_LitterSize', 'litter size'),
+        ('25-1_WeaningAge_d', 'weaning age (d)'),
+        ('23-1_SexualMaturityAge_d', 'age at sexual maturity (d)'),
     ],
     'range_climate': [
         ('26-1_GR_Area_km2', 'range area (km2)'),

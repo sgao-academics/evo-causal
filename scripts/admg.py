@@ -310,7 +310,7 @@ def _has_cycle(bmask):
 
 
 # ---------------------------------------------------------------- vanishing tetrads
-def tetrad_test(X, pairs=None, B=400, seed=0):
+def tetrad_test(X, pairs=None, B=400, seed=0, resample=None):
     """Vanishing-tetrad test for a Gaussian DAG model.
 
     For any four variables i,j,k,l, a linear-Gaussian DAG with uncorrelated errors implies
@@ -318,9 +318,17 @@ def tetrad_test(X, pairs=None, B=400, seed=0):
     is the large-sample z of each tetrad with a bootstrap standard error, in the spirit of
     the constraint-based tests of Silva (2006) and Drton, Foygel & Sullivant (2009).
     Returns the share of tested tetrads that reject at 5%.
+
+    `resample` is the matrix whose rows are bootstrapped.  It defaults to X, which is correct
+    only when rows of X are exchangeable.  Comparative data are emphatically not: related
+    species share covariance, so an iid row bootstrap understates the standard error and the
+    test over-rejects on data that satisfies the null.  Passing the whitened contrasts -- whose
+    rows *are* exchangeable under the Brownian null -- restores the size of the test.  The
+    statistic itself is always evaluated on X, so the two choices differ only in their null.
     """
     X = np.asarray(X, float)
     n, p = X.shape
+    Bm = X if resample is None else np.asarray(resample, float)
     rng = np.random.default_rng(seed)
 
     def tetrads(S):
@@ -342,10 +350,11 @@ def tetrad_test(X, pairs=None, B=400, seed=0):
         return dict(n_tetrads=0, reject_share=float('nan'), median_abs_z=float('nan'),
                     max_abs_z=float('nan'))
     vals = np.array([t for t, _ in obs])
+    nb = Bm.shape[0]
     boots = np.empty((B, len(obs)))
     for b in range(B):
-        idx = rng.integers(0, n, n)
-        Sb = np.corrcoef(X[idx], rowvar=False)
+        idx = rng.integers(0, nb, nb)
+        Sb = np.corrcoef(Bm[idx], rowvar=False)
         boots[b] = [t for t, _ in tetrads(Sb)]
     se = boots.std(0)
     z = np.abs(vals) / np.maximum(se, 1e-12)

@@ -1,26 +1,32 @@
 # -*- coding: utf-8 -*-
-"""E26  Real-data anchor: where do real comparative matrices sit?
+"""E26  Real-data anchor: where do real comparative matrices sit?   (protocol v2)
 
-The paper's rule is stated on a simulated axis, and the objection that matters is whether
-real data ever land in the region the rule calls dangerous.  This block answers it with
-measured data instead of with a reported number from the literature:
+The paper's rule is stated on simulated data. The objection that matters is whether real
+comparative matrices ever land in the region the rule calls dangerous.
 
-  traits   PanTHERIA (Jones et al. 2009), 4,629 mammal species, species-level measurements
+  traits   PanTHERIA (Jones et al. 2009), 4,629 mammal species
   tree     Open Tree of Life synthesis (Hinchliff et al. 2015), pruned to the species that
            have a complete trait vector, branch lengths by Grafen (1989)
 
-Three blocks of increasing width, because the answer may depend on how many traits the
-matrix has.  For each block it reports
+Three changes from v1, each of which removes a way the reported numbers could be wrong.
 
-  K          Blomberg's K per trait  -> which band of the paper's rule the matrix sits in
-  r          leading eigenvalue over the mean of the rest, of the trait correlation matrix
-  r_null     the same statistic under independent Brownian motion on the same tree, which
-             is what phylogenetic signal alone produces; the z score is the excess
-  tetrad     share of vanishing-tetrad tests that reject, against the same null
+1.  The statistic is computed on the CONTRAST correlation matrix, which is the matrix the
+    paper's screen is defined on. v1 computed it on the raw trait correlation, so Table 6
+    was reporting a different quantity from the equations it illustrates.
 
-The null is the point.  If a real matrix has r above what independent Brownian motion
-gives on its own tree, then part of its covariation is not shared history but a common
-factor, which is the object the paper is about.
+2.  The null is exact rather than simulated from a tree. If each trait is independent
+    Brownian motion, the whitened data are independent standard normals whatever the tree,
+    so the contrast correlation matrix is distributed exactly as the sample correlation of
+    n independent d-vectors. No tree enters the null, and no branch-length convention can
+    bias it.
+
+3.  Significance is an empirical p-value, not a normal approximation to a ratio of
+    eigenvalues, and the tetrad test takes its standard error from the same exact null
+    instead of from an iid row bootstrap (which understates the error on data whose rows
+    are phylogenetically dependent and therefore over-rejects).
+
+The report also names the variable the ranking collapses onto, because that is the
+prediction a comparative biologist can check against their own data.
 
 Run: python exp_real.py
 """
@@ -39,27 +45,157 @@ from fetch_real import BLOCKS, PANTH, NEWICK_CLADE, read_pantheria
 from exp_new import load, save, log
 
 DATA = os.path.join(os.path.dirname(S), 'data')
-NNULL = 300
-NSIM_K = 200
+NNULL = 4000          # null draws for the eigenvalue ratios
+NSIM_K = 200          # Brownian sims inside Blomberg's K
+NSIM_TET = 600        # null draws for the tetrad standard errors
+KMAX = 3
 
 
-def lead_ratio(Rm):
-    Rm = np.nan_to_num(np.asarray(Rm, float), nan=0.0, posinf=0.0, neginf=0.0)
-    np.fill_diagonal(Rm, 1.0)
-    Rm = 0.5 * (Rm + Rm.T)
-    w = np.linalg.eigvalsh(Rm)
-    return float(w[-1] / max(w[:-1].mean(), 1e-12)), float(w[-1]), float(w[-2])
+# ---------------------------------------------------------------- basic statistics
+def corr_of(M):
+    M = np.asarray(M, float)
+    M = M - M.mean(0)
+    sd = M.std(0)
+    sd[sd < 1e-12] = 1.0
+    return np.corrcoef(M / sd, rowvar=False)
 
 
+def spectrum(R, kmax=KMAX):
+    """lambda_k over the mean of the eigenvalues below it, for k = 1..kmax."""
+    w = np.linalg.eigvalsh(R)[::-1]
+    out = []
+    for k in range(kmax):
+        rest = w[k + 1:]
+        out.append(float(w[k] / max(rest.mean(), 1e-12)))
+    return out, w
+
+
+def null_spectrum(n, d, reps=NNULL, seed=11, kmax=KMAX):
+    rng = np.random.default_rng(seed)
+    out = np.empty((reps, kmax))
+    for b in range(reps):
+        out[b] = spectrum(corr_of(rng.normal(size=(n, d))), kmax)[0]
+    return out
+
+
+def emp_p(null, obs):
+    null = np.asarray(null, float)
+    return float((1.0 + np.sum(null >= obs)) / (len(null) + 1.0))
+
+
+def tetrad_vals(R):
+    p = R.shape[0]
+    out = []
+    for i in range(p):
+        for j in range(i + 1, p):
+            for k in range(j + 1, p):
+                for l in range(k + 1, p):
+                    out.append(R[i, j] * R[k, l] - R[i, k] * R[j, l])
+    return np.asarray(out, float)
+
+
+def tetrad_par(R, n, reps=NSIM_TET, seed=5):
+    """Vanishing-tetrad test whose standard errors come from the exact null.
+
+    The null is the sample correlation of n independent d-vectors, which is what independent
+    Brownian traits become after whitening. Half the replicates give the standard errors and
+    the other half are scored as if they were data, which measures the size of the test on
+    the very hypothesis it is testing.
+    """
+    if R.shape[0] < 4:
+        return dict(n_tetrads=0, reject=float('nan'), size=float('nan'),
+                    median_abs_z=float('nan'))
+    obs = tetrad_vals(R)
+    p = R.shape[0]
+    rng = np.random.default_rng(seed)
+    T = np.empty((reps, len(obs)))
+    for b in range(reps):
+        T[b] = tetrad_vals(corr_of(rng.normal(size=(n, p))))
+    h = reps // 2
+    sd = T[:h].std(0)
+    z = np.abs(obs) / np.maximum(sd, 1e-15)
+    z0 = np.abs(T[h:]) / np.maximum(sd, 1e-15)
+    return dict(n_tetrads=int(len(obs)),
+                reject=float(np.mean(z > 1.96)),
+                size=float(np.mean(z0 > 1.96)),
+                median_abs_z=float(np.median(z)))
+
+
+def hub(R, k):
+    """Which variable does a top-k ranking collapse onto?"""
+    d = R.shape[0]
+    A = np.abs(R - np.diag(np.diag(R)))
+    iu = np.triu_indices(d, 1)
+    v = A[iu]
+    keep = np.argsort(v)[::-1][:k]
+    deg = np.zeros(d)
+    for t in keep:
+        deg[iu[0][t]] += 1
+        deg[iu[1][t]] += 1
+    order = np.argsort(deg)[::-1]
+    return dict(k=int(k), deg=[int(x) for x in deg],
+                top=int(order[0]), top_deg=int(deg[order[0]]),
+                share=float(deg[order[0]] / max(2.0 * k, 1.0)),
+                second=int(order[1]), second_deg=int(deg[order[1]]))
+
+
+def whiten(X, C):
+    n = C.shape[0]
+    Lc = np.linalg.cholesky(C + 1e-10 * np.eye(n))
+    return np.linalg.solve(Lc, X)
+
+
+# ---------------------------------------------------------------- tree conventions
+def power_lengths(root, rho):
+    """Grafen's power convention: node depth (h_i/H)^rho, edge length the difference.
+
+    rho = 1 reproduces the node-count convention used for the headline numbers, rho -> 0
+    approaches equal branch lengths, and rho > 1 pushes the branching towards the tips.
+    """
+    order = []
+    stack = [(root, False)]
+    while stack:
+        v, done = stack.pop()
+        if done or not v.children:
+            order.append(v)
+        else:
+            stack.append((v, True))
+            for c in v.children:
+                stack.append((c, False))
+    h = {}
+    for v in order:
+        h[id(v)] = 0 if not v.children else 1 + max(h[id(c)] for c in v.children)
+    H = h[id(root)] or 1
+    for v in order:
+        if v is not root:
+            par = None
+            for u in order:
+                if v in u.children:
+                    par = u
+                    break
+            dp = ((H - h[id(v)]) / float(H)) ** rho
+            dq = ((H - h[id(par)]) / float(H)) ** rho
+            v.length = max(dq - dp, 1e-6)
+    root.length = 0.0
+    return root
+
+
+def cov_lambda(C, lam):
+    """Pagel's lambda: shrink the off-diagonal towards zero, keep the diagonal."""
+    D = np.diag(np.diag(C))
+    return lam * C + (1.0 - lam) * D
+
+
+# ---------------------------------------------------------------- block preparation
 def prep_block(name, rows, match, tree_root, names_avail):
-    """Complete-case species for this block, transformed and standardised."""
     cols = [(c, lab) for c, lab in BLOCKS[name]]
-    # drop duplicated column names that only exist as guards
-    seen = set(); keep = []
+    seen = set()
+    keep = []
     for c, lab in cols:
         if c in seen:
             continue
-        seen.add(c); keep.append((c, lab))
+        seen.add(c)
+        keep.append((c, lab))
     cols = keep
     ok = []
     for sp, v in rows:
@@ -71,8 +207,6 @@ def prep_block(name, rows, match, tree_root, names_avail):
         return None
     species = [sp for sp, _ in ok]
     X = np.array([[v[c] for c, _ in cols] for _, v in ok], float)
-    # log-transform a column when it is strictly positive and spans more than 20-fold;
-    # counts, proportions, codes and signed coordinates are left alone
     logs = []
     for j in range(X.shape[1]):
         col = X[:, j]
@@ -80,8 +214,6 @@ def prep_block(name, rows, match, tree_root, names_avail):
             X[:, j] = np.log10(col)
             logs.append(cols[j][0])
     X = (X - X.mean(0)) / (X.std(0) + 1e-12)
-    # a column that is constant in the complete-case subset carries no information and
-    # makes the correlation matrix singular, so it is dropped rather than imputed
     alive = X.std(0) > 1e-8
     dropped = [c for c, a in zip([c for c, _ in cols], alive) if not a]
     X = X[:, alive]
@@ -91,98 +223,137 @@ def prep_block(name, rows, match, tree_root, names_avail):
 
 
 def otol_label(sp, ott):
-    """The synthesis subtree labels a tip with the bare binomial, underscores for spaces.
-
-    The `_ott<id>` suffix appears only when `label_format='id'` is requested, so matching
-    on the suffixed form silently prunes every tip and leaves an empty table -- which is
-    what the first run of this block did.
-    """
+    """The synthesis subtree labels a tip with the bare binomial, underscores for spaces."""
     return sp.replace(' ', '_')
 
 
-def block_stats(blk, root_template, use_grafen=True):
+def trimmed(blk, root_template, convention='grafen', rho=1.0):
+    """Prune the tree to this block's species and return (X, labels, C)."""
     species = blk['species']
     X = blk['X']
     label_of = {otol_label(s, blk['match'][s]): s for s in species}
     root = phylo.parse_newick(root_template)
     root, kept = phylo.prune(root, set(label_of))
     kept_set = set(kept)
-    keep_idx = [i for i, s in enumerate(species) if otol_label(s, blk['match'][s]) in kept_set]
-    species = [species[i] for i in keep_idx]
+    idx = [i for i, s in enumerate(species) if otol_label(s, blk['match'][s]) in kept_set]
+    species = [species[i] for i in idx]
     labels = [otol_label(s, blk['match'][s]) for s in species]
-    X = X[keep_idx]
-    if use_grafen:
+    X = X[idx]
+    good = np.isfinite(X).all(axis=1)
+    if not good.all():
+        X = X[good]
+        labels = [l for l, g in zip(labels, good) if g]
+        species = [s for s, g in zip(species, good) if g]
+        root = phylo.parse_newick(root_template)
+        root, _ = phylo.prune(root, set(labels))
+    if convention == 'grafen':
         phylo.grafen_lengths(root)
-    else:
+        if rho != 1.0:
+            power_lengths(root, rho)
+    elif convention == 'equal':
         phylo.equal_lengths(root)
     C = phylo.brownian_cov(root, labels)
+    return X, labels, C, species
+
+
+def block_stats(blk, root_template, verbose=True):
+    X, labels, C, species = trimmed(blk, root_template)
     n, d = X.shape
-    if n < 5 or d < 2:
-        print('  block %s has n=%d d=%d, too small to score' % (blk.get('block'), n, d))
+    if n < 6 or d < 4:
+        log('  block %s too small: n=%d d=%d' % (blk.get('block'), n, d))
         return None
-    if not np.isfinite(X).all():
-        print('  block %s has non-finite entries, dropped %d rows' %
-              (blk.get('block'), int((~np.isfinite(X).all(axis=1)).sum())))
-        keep = np.isfinite(X).all(axis=1)
-        X = X[keep]
-        species = [s for s, k_ in zip(species, keep) if k_]
-        labels = [l for l, k_ in zip(labels, keep) if k_]
-        root2 = phylo.prune(phylo.parse_newick(root_template), set(labels))[0]
-        phylo.grafen_lengths(root2) if use_grafen else phylo.equal_lengths(root2)
-        C = phylo.brownian_cov(root2, labels)
-        n, d = X.shape
 
     K = [float(blomberg_k(X[:, j], C, nsim=NSIM_K, seed=1000 + j)) for j in range(d)]
-    Rm = np.corrcoef(X, rowvar=False)
-    r_obs, l1, l2 = lead_ratio(Rm)
 
-    # independent Brownian motion on the same tree: shared history and nothing else
-    Lc = np.linalg.cholesky(C + 1e-10 * np.eye(n))
-    rng = np.random.default_rng(7)
-    r_null = np.empty(NNULL)
-    for b in range(NNULL):
-        Xn = Lc @ rng.normal(size=(n, d))
-        Xn = (Xn - Xn.mean(0)) / (Xn.std(0) + 1e-12)
-        r_null[b] = lead_ratio(np.corrcoef(Xn, rowvar=False))[0]
-    z = (r_obs - r_null.mean()) / max(r_null.std(), 1e-12)
+    P = whiten(X, C)
+    Rc = corr_of(P)
+    Rr = corr_of(X)
 
-    # tetrads on the real matrix and on one null replicate
-    tt = admg.tetrad_test(X, B=300, seed=3)
-    Xn = Lc @ rng.normal(size=(n, d))
-    Xn = (Xn - Xn.mean(0)) / (Xn.std(0) + 1e-12)
-    tt_null = admg.tetrad_test(Xn, B=300, seed=3)
+    spec_c, w_c = spectrum(Rc)
+    spec_r, _ = spectrum(Rr)
+    null = null_spectrum(n, d)
+    pvals = [emp_p(null[:, j], spec_c[j]) for j in range(KMAX)]
 
-    out = dict(block=blk.get('block'), n=int(n), d=int(d),
+    tt = tetrad_par(Rc, n)
+
+    # the ranking, and what it collapses onto, before and after deflation
+    hb = hub(Rc, k=d)
+    w, v = np.linalg.eigh(Rc)
+    i1 = int(np.argmax(w))
+    Rd = Rc - w[i1] * np.outer(v[:, i1], v[:, i1])
+    hd = hub(Rd, k=d)
+    spec_d, _ = spectrum(Rd, 1)
+
+    out = dict(block=blk.get('block'), n=int(n), d=int(d), species=len(species),
                K=[round(k, 3) for k in K], K_mean=round(float(np.mean(K)), 3),
                K_median=round(float(np.median(K)), 3),
                K_min=round(float(np.min(K)), 3), K_max=round(float(np.max(K)), 3),
                K_over_0p30=int(sum(1 for k in K if k > 0.30)),
-               r=round(r_obs, 3), lambda1=round(l1, 2),
-               r_null_mean=round(float(r_null.mean()), 3),
-               r_null_sd=round(float(r_null.std()), 3),
-               r_null_q95=round(float(np.quantile(r_null, 0.95)), 3),
-               r_z=round(float(z), 2),
-               tetrad_reject=round(tt['reject_share'], 3),
-               tetrad_reject_null=round(tt_null['reject_share'], 3),
-               tetrad_n=tt['n_tetrads'],
-               grafen=use_grafen,
-               cols=blk['cols'], labels=blk['labels'], logged=blk['logged'])
+               cols=blk['cols'], labels=blk['labels'], logged=blk['logged'],
+               dropped=blk['dropped'],
+               contrast=dict(r=[round(x, 3) for x in spec_c],
+                             p=[round(x, 5) for x in pvals],
+                             lam=[round(float(x), 3) for x in w_c[:KMAX]],
+                             null_mean=[round(float(x), 3) for x in null.mean(0)],
+                             null_q95=[round(float(x), 3) for x in np.quantile(null, 0.95, axis=0)],
+                             null_max=[round(float(x), 3) for x in null.max(0)]),
+               raw=dict(r=round(spec_r[0], 3)),
+               tetrad=tt,
+               hub=dict(top=hb['top'], top_label=blk['labels'][hb['top']],
+                        top_deg=hb['top_deg'], share=round(hb['share'], 3),
+                        second_label=blk['labels'][hb['second']],
+                        second_deg=hb['second_deg'], deg=hb['deg']),
+               hub_deflated=dict(top=hd['top'], top_label=blk['labels'][hd['top']],
+                                 top_deg=hd['top_deg'], share=round(hd['share'], 3),
+                                 deg=hd['deg']),
+               r_after_deflation=round(spec_d[0], 3))
+    return out
+
+
+def variants(blk, root_template):
+    """Is the answer an artefact of the branch-length convention or the assumed lambda?"""
+    out = {}
+    for tag, conv, rho in (('grafen_1.0', 'grafen', 1.0),
+                           ('grafen_0.5', 'grafen', 0.5),
+                           ('grafen_2.0', 'grafen', 2.0),
+                           ('equal', 'equal', 1.0)):
+        X, labels, C, _ = trimmed(blk, root_template, convention=conv, rho=rho)
+        n, d = X.shape
+        P = whiten(X, C)
+        Rc = corr_of(P)
+        s, _ = spectrum(Rc, 1)
+        null = null_spectrum(n, d, reps=1500, seed=21, kmax=1)
+        # K is a per-tree statistic and is reported once, under the headline convention;
+        # what the variants test is whether r moves with the convention, not K
+        out[tag] = dict(n=int(n), d=int(d), r=round(s[0], 3),
+                        p=round(emp_p(null[:, 0], s[0]), 5),
+                        K_mean=float('nan'))
+    for lam in (0.8, 0.5):
+        X, labels, C, _ = trimmed(blk, root_template)
+        Cl = cov_lambda(C, lam)
+        n, d = X.shape
+        P = whiten(X, Cl)
+        Rc = corr_of(P)
+        s, _ = spectrum(Rc, 1)
+        null = null_spectrum(n, d, reps=1500, seed=31, kmax=1)
+        out['lambda_%.1f' % lam] = dict(n=int(n), d=int(d), r=round(s[0], 3),
+                                        p=round(emp_p(null[:, 0], s[0]), 5),
+                                        K_mean=float('nan'))
     return out
 
 
 def main():
     res = load('e26_real')
-    root_template = __import__('io').open(NEWICK_CLADE, encoding='utf-8').read()
+    io = __import__('io')
+    root_template = io.open(NEWICK_CLADE, encoding='utf-8').read()
     rows = read_pantheria()
     log('species with any trait', len(rows))
-    match = json.load(__import__('io').open(
-        os.path.join(DATA, 'otol_match.json'), encoding='utf-8'))
+    match = json.load(io.open(os.path.join(DATA, 'otol_match.json'), encoding='utf-8'))
     log('matched', sum(1 for v in match.values() if v))
 
     for name in BLOCKS:
-        key = name
-        if key in res:
-            log('skip', key)
+        if name in res and 'contrast' in res[name]:
+            log('skip', name)
             continue
         t0 = time.time()
         blk = prep_block(name, rows, match, root_template, None)
@@ -191,24 +362,20 @@ def main():
             continue
         blk['block'] = name
         blk['match'] = match
-        o = block_stats(blk, root_template, use_grafen=True)
-        o_el = block_stats(blk, root_template, use_grafen=False)
+        o = block_stats(blk, root_template)
         if o is None:
-            log('block', name, 'too small after pruning')
             continue
-        if o_el is None:
-            o_el = dict(r=float('nan'), r_z=float('nan'), K_mean=float('nan'),
-                        tetrad_reject=float('nan'))
-        o['sensitivity_equal_lengths'] = dict(
-            r=o_el['r'], r_z=o_el['r_z'], K_mean=o_el['K_mean'],
-            tetrad_reject=o_el['tetrad_reject'])
-        res[key] = o
+        o['variants'] = variants(blk, root_template)
+        res[name] = o
         save('e26_real', res)
-        log('%-18s n=%4d d=%2d  K=%.3f [%.2f,%.2f]  r=%.2f (null %.2f±%.2f, z=%.1f)'
-            '  tetrad %.2f vs null %.2f  %.0fs' %
-            (name, o['n'], o['d'], o['K_mean'], o['K_min'], o['K_max'], o['r'],
-             o['r_null_mean'], o['r_null_sd'], o['r_z'],
-             o['tetrad_reject'], o['tetrad_reject_null'], time.time() - t0))
+        log('%-14s n=%4d d=%2d K=%.2f [%.2f,%.2f]  contrast r1=%.2f p=%.1e '
+            'r2=%.2f p=%.2f r3=%.2f p=%.2f  tetrad %.2f (size %.2f)  hub=%s  %.0fs'
+            % (name, o['n'], o['d'], o['K_mean'], o['K_min'], o['K_max'],
+               o['contrast']['r'][0], o['contrast']['p'][0],
+               o['contrast']['r'][1], o['contrast']['p'][1],
+               o['contrast']['r'][2], o['contrast']['p'][2],
+               o['tetrad']['reject'], o['tetrad']['size'],
+               o['hub']['top_label'], time.time() - t0))
 
 
 if __name__ == '__main__':

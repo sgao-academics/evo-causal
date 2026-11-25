@@ -227,3 +227,20 @@ Mammalia; both land in `data/`. The two files it produces are small enough to sh
 `--check` works offline, and the script is only needed if the data must be rebuilt from source.
 
 Registered result files: `results/e25_admg.json`, `results/e26_real.json`.
+
+## Fifth round (real data and calibration audit)
+
+| script | produces | what it does |
+|:--|:--|:--|
+| `scripts/fetch_real.py` | `data/PanTHERIA.txt`, `data/otol_match.json`, `data/otol_mammalia.nwk` | downloads the mammal trait table and the Open Tree of Life topology |
+| `scripts/fetch_birds.py` | `data/BirdFuncDat.txt`, `data/otol_match_birds.json`, `data/otol_aves.nwk` | the same for EltonTraits birds |
+| `scripts/exp_real.py` | `results/e26_real.json` | five-block contrast statistics: Blomberg's K, the leading ratios against the exact null, the tetrad test, the hub |
+| `scripts/exp_birds.py` | `results/e27_birds.json` | the same protocol on the avian clade |
+| `scripts/exp_graphnull.py` | updates `results/e26_real.json`, `results/e27_birds.json` | adds the sparse-random-DAG reference at the same n and d |
+| `scripts/exp_calib.py` | `results/e28_calib.json` | what the screen costs when the calibration graph is not the truth, and how many components must be removed |
+| `scripts/make_tables2.py` | the three new tables | renders them from the result files |
+| `scripts/audit_v4.py` | -- | checks every number in the new text and every cell of the new tables against the result files |
+
+The two fetchers need network access; everything after them runs offline from `data/`.
+`python scripts/audit_v4.py` prints one line per check and `OVERALL PASS` when the prose
+and the result files agree.

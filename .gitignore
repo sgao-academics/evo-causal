@@ -21,6 +21,7 @@ revision/
 scripts/_attic/
 notebooks/
 /*.md
+/*.txt
 !/README.md
 *.zip
 
