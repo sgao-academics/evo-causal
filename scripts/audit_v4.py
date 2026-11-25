@@ -14,6 +14,14 @@ RES = os.path.join(os.path.dirname(BASE), 'results')
 PAPER = os.path.join(os.path.dirname(BASE), 'paper')
 sys.path.insert(0, os.path.join(os.path.dirname(BASE), 'scripts'))
 
+TEXFILE = os.path.join(PAPER, 'evo_causal_revision.tex')
+if not os.path.exists(TEXFILE):
+    # the manuscript is deliberately not part of this repository, so this script is only
+    # meaningful next to it; in a clean clone there is nothing to compare the prose with
+    print('manuscript not present beside this script: nothing to audit')
+    print('(the table and prose checks need evo_causal_revision.tex in ../paper)')
+    raise SystemExit(0)
+
 M = json.load(io.open(os.path.join(RES, 'e25_admg.json'), encoding='utf-8'))
 R = json.load(io.open(os.path.join(RES, 'e26_real.json'), encoding='utf-8'))
 B = json.load(io.open(os.path.join(RES, 'e27_birds.json'), encoding='utf-8'))
