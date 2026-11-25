@@ -1,7 +1,7 @@
-# Phylogenetic signal is not phylogenetic confounding
+# Latent confounding, not phylogenetic signal, limits causal discovery across species
 
-Replication package for the manuscript *Phylogenetic signal is not phylogenetic
-confounding: what actually limits causal discovery across species*.
+Replication package for the manuscript *Latent confounding, not phylogenetic signal,
+limits causal discovery across species*.
 
 The package contains the code that produced every number in the paper and every
 result file those numbers were read from. It does not contain the manuscript or
