@@ -1,0 +1,281 @@
+{
+ "blocks": {
+  "ecology": {
+   "n": 919,
+   "d": 6,
+   "k": 2,
+   "obs": [
+    1.465,
+    1.47,
+    1.404
+   ],
+   "null_mean": [
+    2.219,
+    1.762,
+    1.631
+   ],
+   "null_sd": [
+    0.39,
+    0.41,
+    0.173
+   ],
+   "null_q95": [
+    2.956,
+    2.424,
+    1.904
+   ],
+   "p": [
+    1.0,
+    0.6108,
+    0.8762
+   ]
+  },
+  "life_history": {
+   "n": 337,
+   "d": 6,
+   "k": 2,
+   "obs": [
+    3.994,
+    1.682,
+    1.294
+   ],
+   "null_mean": [
+    2.304,
+    1.803,
+    1.686
+   ],
+   "null_sd": [
+    0.411,
+    0.364,
+    0.171
+   ],
+   "null_q95": [
+    3.019,
+    2.446,
+    1.99
+   ],
+   "p": [
+    0.002,
+    0.479,
+    1.0
+   ]
+  },
+  "range_climate": {
+   "n": 2651,
+   "d": 12,
+   "k": 4,
+   "obs": [
+    3.574,
+    4.476,
+    3.418
+   ],
+   "null_mean": [
+    2.338,
+    1.941,
+    1.692
+   ],
+   "null_sd": [
+    0.424,
+    0.241,
+    0.327
+   ],
+   "null_q95": [
+    3.135,
+    2.351,
+    2.191
+   ],
+   "p": [
+    0.02,
+    0.002,
+    0.002
+   ]
+  },
+  "bird_diet": {
+   "n": 1143,
+   "d": 10,
+   "k": 3,
+   "obs": [
+    1.826,
+    1.527,
+    1.531
+   ],
+   "null_mean": [
+    2.25,
+    1.816,
+    1.55
+   ],
+   "null_sd": [
+    0.414,
+    0.265,
+    0.271
+   ],
+   "null_q95": [
+    3.019,
+    2.169,
+    2.106
+   ],
+   "p": [
+    0.9062,
+    0.7565,
+    0.2575
+   ]
+  },
+  "bird_niche": {
+   "n": 1140,
+   "d": 9,
+   "k": 3,
+   "obs": [
+    1.758,
+    1.634,
+    1.537
+   ],
+   "null_mean": [
+    2.285,
+    1.889,
+    1.596
+   ],
+   "null_sd": [
+    0.395,
+    0.295,
+    0.298
+   ],
+   "null_q95": [
+    3.039,
+    2.273,
+    2.247
+   ],
+   "p": [
+    0.976,
+    0.7485,
+    0.3293
+   ]
+  }
+ },
+ "holes": {
+  "ecology:r1": {
+   "p": 1.0,
+   "holm": 1.0,
+   "survives": false
+  },
+  "ecology:r2": {
+   "p": 0.6108,
+   "holm": 1.0,
+   "survives": false
+  },
+  "ecology:r3": {
+   "p": 0.8762,
+   "holm": 1.0,
+   "survives": false
+  },
+  "life_history:r1": {
+   "p": 0.002,
+   "holm": 0.0299,
+   "survives": true
+  },
+  "life_history:r2": {
+   "p": 0.479,
+   "holm": 1.0,
+   "survives": false
+  },
+  "life_history:r3": {
+   "p": 1.0,
+   "holm": 1.0,
+   "survives": false
+  },
+  "range_climate:r1": {
+   "p": 0.02,
+   "holm": 0.2395,
+   "survives": false
+  },
+  "range_climate:r2": {
+   "p": 0.002,
+   "holm": 0.0299,
+   "survives": true
+  },
+  "range_climate:r3": {
+   "p": 0.002,
+   "holm": 0.0299,
+   "survives": true
+  },
+  "bird_diet:r1": {
+   "p": 0.9062,
+   "holm": 1.0,
+   "survives": false
+  },
+  "bird_diet:r2": {
+   "p": 0.7565,
+   "holm": 1.0,
+   "survives": false
+  },
+  "bird_diet:r3": {
+   "p": 0.2575,
+   "holm": 1.0,
+   "survives": false
+  },
+  "bird_niche:r1": {
+   "p": 0.976,
+   "holm": 1.0,
+   "survives": false
+  },
+  "bird_niche:r2": {
+   "p": 0.7485,
+   "holm": 1.0,
+   "survives": false
+  },
+  "bird_niche:r3": {
+   "p": 0.3293,
+   "holm": 1.0,
+   "survives": false
+  }
+ },
+ "preproc": {
+  "ecology": {
+   "r1_headline": 1.465,
+   "r1_nolog": 1.456,
+   "loo_min": 1.37,
+   "loo_max": 1.494,
+   "loo": {
+    "5-1_AdultBodyMass_g": 1.484,
+    "12-1_HabitatBreadth": 1.37,
+    "12-2_Terrestriality": 1.372,
+    "15-1_LitterSize": 1.494,
+    "6-1_DietBreadth": 1.473,
+    "6-2_TrophicLevel": 1.452
+   }
+  },
+  "life_history": {
+   "r1_headline": 3.994,
+   "r1_nolog": 2.235,
+   "loo_min": 3.034,
+   "loo_max": 4.252,
+   "loo": {
+    "5-1_AdultBodyMass_g": 3.034,
+    "9-1_GestationLen_d": 3.486,
+    "17-1_MaxLongevity_m": 3.436,
+    "15-1_LitterSize": 4.252,
+    "25-1_WeaningAge_d": 3.542,
+    "23-1_SexualMaturityAge_d": 3.213
+   }
+  },
+  "range_climate": {
+   "r1_headline": 3.574,
+   "r1_nolog": 3.666,
+   "loo_min": 3.451,
+   "loo_max": 3.651,
+   "loo": {
+    "26-1_GR_Area_km2": 3.647,
+    "26-2_GR_MaxLat_dd": 3.583,
+    "26-3_GR_MinLat_dd": 3.6,
+    "26-6_GR_MinLong_dd": 3.495,
+    "26-7_GR_MRLong_dd": 3.471,
+    "26-5_GR_MaxLong_dd": 3.451,
+    "27-2_HuPopDen_Mean_n/km2": 3.651,
+    "28-1_Precip_Mean_mm": 3.638,
+    "28-2_Temp_Mean_01degC": 3.541,
+    "30-1_AET_Mean_mm": 3.628,
+    "30-2_PET_Mean_mm": 3.597,
+    "27-4_HuPopDen_Change": 3.613
+   }
+  }
+ }
+}

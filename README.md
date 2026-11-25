@@ -244,3 +244,9 @@ Registered result files: `results/e25_admg.json`, `results/e26_real.json`.
 The two fetchers need network access; everything after them runs offline from `data/`.
 `python scripts/audit_v4.py` prints one line per check and `OVERALL PASS` when the prose
 and the result files agree.
+
+| `exp_resit.py` | E29 | the nonlinear additive-noise family on the same grid |
+| `exp_holm.py` | E30 | Holm correction over the fifteen real-data tests, and the preprocessing sensitivities |
+| `make_fig_real.py` | Fig. 5 | the five real matrices against the sparse-graph reference |
+| `make_fig_resit.py` | Fig. S3 | the nonlinear family against the two linear rules |
+| `audit_split.py` | -- | the split-submission audit (numbers, tables, limits, references); needs the manuscripts beside it |

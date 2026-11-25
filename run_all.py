@@ -3,7 +3,7 @@
     python run_all.py            run every experiment, then check the archive
     python run_all.py --fast     reduced grid (one seed), for a quick smoke run
     python run_all.py --check    check the shipped result files, no computation
-    python run_all.py --figures  redraw the five figures from results/
+    python run_all.py --figures  redraw every figure from results/
 
 The --check mode is the one to use when the question is "does the archive agree
 with the paper". It touches nothing and finishes in seconds.
@@ -34,10 +34,15 @@ STAGES = [
     ('E21    rank-one residual search, archived trial', 'e21_lrsem.py'),
     ('E25    the ADMG family, maximum likelihood with bidirected edges', 'exp_admg.py'),
     ('E26    real traits on the real synthesis tree', 'exp_real.py'),
+    ('E27    the same protocol on birds', 'exp_birds.py'),
+    ('E26b   the sparse-graph reference for every block', 'exp_graphnull.py'),
+    ('E28    calibration audit and the multi-direction repair', 'exp_calib.py'),
+    ('E29    nonlinear additive-noise family', 'exp_resit.py'),
+    ('E30    Holm correction and preprocessing sensitivity', 'exp_holm.py'),
 ]
 
 FIGURES = ['make_fig1.py', 'make_fig2_fig4_fig5.py', 'make_fig3.py',
-           'make_fig6_fig7.py']
+           'make_fig6_fig7.py', 'make_fig_real.py', 'make_fig_resit.py']
 
 # Every result file the manuscript reads, with the number of entries expected.
 EXPECTED = {
@@ -69,6 +74,10 @@ EXPECTED = {
     'e26_real.json': 3,
     'e22_seed_spread.json': 5,
     'e23_families10.json': 6,
+    'e27_birds.json': 2,
+    'e28_calib.json': 31,
+    'e29_resit.json': 6,
+    'e30_holm.json': 3,
 }
 
 
