@@ -4,8 +4,8 @@
   "d": 6,
   "n_open_tree": 600,
   "join": 0.548,
-  "open_tree_grafen": 4.011,
-  "upham_grafen": 4.228,
+  "open_tree_grafen": 3.332,
+  "upham_grafen": 3.39,
   "upham_dated": 2.434,
   "tip_error_ladder": {
    "0.00": 2.434,
@@ -18,8 +18,8 @@
    "2.00": 8.524
   },
   "unwhitened": 11.283,
-  "p_open_tree_grafen": 0.0002,
-  "p_upham_grafen": 0.0002,
+  "p_open_tree_grafen": 0.0056,
+  "p_upham_grafen": 0.0024,
   "p_upham_dated": 0.31694,
   "null": {
    "k": 2,
@@ -27,8 +27,8 @@
    "sd": 0.393,
    "draws": 5000
   },
-  "delta_topology": 0.217,
-  "delta_dates": -1.794
+  "delta_topology": 0.058,
+  "delta_dates": -0.956
  },
  "ecology": {
   "n": 879,
@@ -36,7 +36,7 @@
   "n_open_tree": 1372,
   "join": 0.641,
   "open_tree_grafen": 1.467,
-  "upham_grafen": 1.445,
+  "upham_grafen": 1.5,
   "upham_dated": 1.872,
   "tip_error_ladder": {
    "0.00": 1.872,
@@ -58,16 +58,16 @@
    "sd": 0.395,
    "draws": 5000
   },
-  "delta_topology": -0.022,
-  "delta_dates": 0.427
+  "delta_topology": 0.033,
+  "delta_dates": 0.372
  },
  "range_climate": {
   "n": 2549,
   "d": 12,
   "n_open_tree": 3486,
   "join": 0.731,
-  "open_tree_grafen": 3.514,
-  "upham_grafen": 3.677,
+  "open_tree_grafen": 3.613,
+  "upham_grafen": 3.701,
   "upham_dated": 3.703,
   "tip_error_ladder": {
    "0.00": 3.703,
@@ -80,8 +80,8 @@
    "2.00": 4.54
   },
   "unwhitened": 4.831,
-  "p_open_tree_grafen": 0.021,
-  "p_upham_grafen": 0.011,
+  "p_open_tree_grafen": 0.0158,
+  "p_upham_grafen": 0.0108,
   "p_upham_dated": 0.0108,
   "null": {
    "k": 4,
@@ -89,7 +89,7 @@
    "sd": 0.44,
    "draws": 5000
   },
-  "delta_topology": 0.163,
-  "delta_dates": 0.026
+  "delta_topology": 0.088,
+  "delta_dates": 0.002
  }
 }

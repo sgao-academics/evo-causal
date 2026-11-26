@@ -1,0 +1,56 @@
+{
+ "lam0.0": {
+  "lam": 0.0,
+  "seeds": 10,
+  "notears_auroc": 0.7242,
+  "notears_auroc_sd": 0.1017,
+  "corr_auroc": 0.9957,
+  "corr_f1_recomputed": 0.84,
+  "sec": 136.8
+ },
+ "lam0.5": {
+  "lam": 0.5,
+  "seeds": 10,
+  "notears_auroc": 0.7886,
+  "notears_auroc_sd": 0.0793,
+  "corr_auroc": 0.9987,
+  "corr_f1_recomputed": 0.91,
+  "sec": 102.9
+ },
+ "lam1.0": {
+  "lam": 1.0,
+  "seeds": 10,
+  "notears_auroc": 0.8745,
+  "notears_auroc_sd": 0.0392,
+  "corr_auroc": 0.9969,
+  "corr_f1_recomputed": 0.86,
+  "sec": 87.8
+ },
+ "lam1.5": {
+  "lam": 1.5,
+  "seeds": 10,
+  "notears_auroc": 0.8541,
+  "notears_auroc_sd": 0.0514,
+  "corr_auroc": 0.9787,
+  "corr_f1_recomputed": 0.7,
+  "sec": 74.8
+ },
+ "lam2.0": {
+  "lam": 2.0,
+  "seeds": 10,
+  "notears_auroc": 0.8423,
+  "notears_auroc_sd": 0.0645,
+  "corr_auroc": 0.9008,
+  "corr_f1_recomputed": 0.56,
+  "sec": 73.7
+ },
+ "lam3.0": {
+  "lam": 3.0,
+  "seeds": 10,
+  "notears_auroc": 0.7874,
+  "notears_auroc_sd": 0.079,
+  "corr_auroc": 0.7626,
+  "corr_f1_recomputed": 0.26,
+  "sec": 54.4
+ }
+}

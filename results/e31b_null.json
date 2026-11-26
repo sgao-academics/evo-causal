@@ -1,0 +1,79 @@
+{
+ "n": 337,
+ "nulls": {
+  "d6": {
+   "n": 337,
+   "d": 6,
+   "reps": 4000,
+   "mean": 1.229,
+   "sd": 0.056,
+   "q95": 1.33,
+   "q99": 1.385,
+   "max": 1.492,
+   "sec": 0.0009
+  },
+  "d5": {
+   "n": 337,
+   "d": 5,
+   "reps": 4000,
+   "mean": 1.201,
+   "sd": 0.058,
+   "q95": 1.309,
+   "q99": 1.362,
+   "max": 1.48,
+   "sec": 0.0009
+  }
+ },
+ "sensitivity": {
+  "grafen_0.5": {
+   "full": 3.2,
+   "no_mass": 2.31,
+   "no_longevity": 2.78,
+   "no_litter": 3.47
+  },
+  "grafen_1.0": {
+   "full": 3.29,
+   "no_mass": 2.38,
+   "no_longevity": 2.86,
+   "no_litter": 3.58
+  },
+  "grafen_2.0": {
+   "full": 3.56,
+   "no_mass": 2.58,
+   "no_longevity": 3.09,
+   "no_litter": 3.87
+  },
+  "equal_1.0": {
+   "full": 3.67,
+   "no_mass": 2.69,
+   "no_longevity": 3.16,
+   "no_litter": 3.96
+  }
+ },
+ "subsample": {
+  "full": {
+   "median": 3.53,
+   "lo": 3.2,
+   "hi": 3.85,
+   "reps": 300
+  },
+  "no_mass": {
+   "median": 2.57,
+   "lo": 2.31,
+   "hi": 2.86,
+   "reps": 300
+  },
+  "no_longevity": {
+   "median": 3.06,
+   "lo": 2.8,
+   "hi": 3.38,
+   "reps": 300
+  },
+  "no_litter": {
+   "median": 3.84,
+   "lo": 3.46,
+   "hi": 4.21,
+   "reps": 300
+  }
+ }
+}

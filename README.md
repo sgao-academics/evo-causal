@@ -37,8 +37,14 @@ scripts/
   _e12_spearman.py           E12: Pearson, Spearman, O(D)GC
   _e13_odgc.py               E13: O(D)GC
   make_fig1.py               Figure 1
-  make_fig2_fig4_fig5.py     Figures 2, 4 and 5
+  make_fig2.py               Figure 2
   make_fig3.py               Figure 3
+  make_fig4.py               Figure 4
+  make_fig5.py               Figure 5
+  make_figS1.py              Figure S1
+  make_figS2.py              Figure S2
+  make_figS3.py              Figure S3
+  make_figS4.py              Figure S4
   palette.py                 the single source of colour for every figure
   _fig1_arrays.npz           the matrices Figure 1 draws, written by _e1_n12.py
 results/
@@ -75,14 +81,17 @@ to see whether the archive and the paper agree.
 ## Reproducing the figures
 
 ```
-python scripts/_e1_n12.py                  # writes _fig1_arrays.npz
-python scripts/make_fig1.py
-python scripts/make_fig2_fig4_fig5.py
-python scripts/make_fig3.py
+python scripts/_e1_n12.py                  # writes _fig1_arrays.npz, needed by Figure 1
+python run_all.py --figures                # draws all nine, one script per figure
 ```
 
-Figures are written to `figures/`, which is not tracked. Each script reads only
-files in `results/`, so a figure cannot disagree with the tables.
+One figure, one script: `make_fig1.py` … `make_fig5.py` draw the five figures of
+the manuscript, `make_figS1.py` … `make_figS4.py` draw the four of the supplement,
+and the number in the name is the number in the paper.
+
+Figures are written to `figures/`, which is not tracked: the archive carries no
+image files, so the directory has to be rebuilt by the command above. Each script
+reads only files in `results/`, so a figure cannot disagree with the tables.
 
 ## No input data files
 
@@ -176,7 +185,7 @@ the Discussion: a search whose residual covariance is modelled as rank one plus 
 absorbs the leading direction of any covariance with a single factor and no edges, and
 returns $F_1 = 0.28$ at $\lambda = 0$ against 0.87 for the plain contrast rule.
 
-`make_fig6_fig7.py` draws the two figures added in this round from those files.
+`make_fig3.py` and `make_fig4.py` draw the two figures added in this round from those files.
 
 ## Reproducibility checks performed
 
@@ -186,7 +195,7 @@ returns $F_1 = 0.28$ at $\lambda = 0$ against 0.87 for the plain contrast rule.
 * `_e11_auroc.py` rerun on the full six-loading grid: all twelve AUROC values
   (NOTEARS and the correlation rule at six loadings) match the archive exactly,
   to the third decimal, at 0.0000 absolute difference.
-* `make_fig3.py` rerun: the PNG is byte-identical to the shipped figure.
+* `make_figS2.py` rerun: the PNG is byte-identical to the shipped figure.
 * `notears_impl.notears_linear` compared against the implementation the numbers
   were originally produced with: identical matrices, `max|dW| = 0.0`, at two
   penalty weights and at both threshold settings.
@@ -255,6 +264,61 @@ and the result files agree.
 | `exp_holm.py` | E30 | Holm correction over the fifteen real-data tests, and the preprocessing sensitivities |
 | `exp_upham.py` | E31 | the mammal blocks on the dated Upham et al. (2019) tree, with the topology and the length convention separated, and the tip-error ladder; downloads `data/upham_mammals_mcc.tre` (4.4 MB) on first run |
 | `exp_kband.py` | E32 | the number of admitted edges varied by a factor of 1.5 either way, and thirty-seed percentile intervals |
-| `make_fig_real.py` | Fig. 5 | the five real matrices against the sparse-graph reference |
-| `make_fig_resit.py` | Fig. S3 | the nonlinear family against the two linear rules |
+| `make_fig5.py` | Fig. 5 | the five real matrices against the sparse-graph reference |
+| `make_figS3.py` | Fig. S3 | the nonlinear family against the two linear rules |
 | `audit_split.py` | -- | the split-submission audit (numbers, tables, limits, references); needs the manuscripts beside it |
+
+## Correction, 2026-11-26: Grafen branch lengths
+
+The real-data stage assigns branch lengths to the Open Tree of Life synthesis topology with
+Grafen's (1989) node-count convention. The implementation in `scripts/phylo.py` assigned each edge
+its node's normalised depth, `(H - h_v)/H`, rather than the increment along that edge,
+`(h_parent - h_v)/H`. Only the increment telescopes, so the earlier version left root-to-tip
+distances between 4.95 and 21.0 on the mammal tree instead of a constant 1: the covariance was not
+that of contemporaneous tips and the whitened rows were not contrasts. `exp_real.power_lengths` had
+a second defect, differencing the depths in the wrong order and clamping the result, which silently
+collapsed every rho != 1 to a constant branch length.
+
+Both are fixed at the source (`phylo.grafen_lengths`, `phylo.power_lengths`,
+`phylo.collapse_unary`), degree-one nodes left by pruning are spliced out before lengths are
+assigned, and every affected result file has been regenerated:
+
+| file | producer | what changed |
+|:--|:--|:--|
+| `results/e26_real.json`, `results/e27_birds.json` | `_e34_rerun.py` | the five real blocks: $K$ and $r_1$ recomputed |
+| `results/e30_holm.json` | `exp_holm.py` | graph-reference p-values, Holm, preprocessing sensitivity |
+| `results/e31_upham.json` | `exp_upham.py` | the dated-tree comparison (A/B on the shared species set) |
+| `results/e36_kfloor.json` | `_e36_kfloor.py` | new: the iid floor and the Brownian reference on each block's own tree |
+
+The synthetic experiments are untouched: their trees are simulated with explicit lengths and never
+pass through `phylo.grafen_lengths`. The `e26_real_fixed.json` and `e27_birds_fixed.json` files keep
+the corrected values beside the pre-correction ones for comparison.
+
+Two consequences for the prose, both recorded in the manuscript: Blomberg's $K$ is read against the
+floor its own tree produces for independent data (0.06 to 0.12) rather than against 0.30, and the
+equal-branch-length convention is not usable on these trees at all, because setting every edge to
+one leaves the tips at distances from 1 to 21 on an unbalanced tree. `_e37_equal_check.py` prints
+that spread.
+
+## The screen as a package
+
+`tool/pic_screen` is a self-contained implementation of the screen: Newick parsing, unary-node
+collapse, Grafen lengths, the whiten, the leading ratios, the exact null, the hub variable and the
+deflation step. It needs only numpy.
+
+```
+python -m pic_screen                      # eight self-checks
+python -m pic_screen --example            # the life-history matrix in tool/example
+```
+
+The self-checks include a regression test for the defect above: assigning each edge its node's
+depth instead of the increment must break contemporaneity, and the tool must refuse that tree.
+
+| script | experiment |
+|:--|:--|
+| `_e31_named_case.py` | the life-history matrix step by step: ratios, loadings, deflation |
+| `_e31b_null.py` | its null, rho and drop-one sensitivities, 80% subsample stability |
+| `_e33_export.py` | writes `tool/example/*` and checks the package against the pipeline |
+| `_e35_k_check.py` | Blomberg's K on Brownian and on iid data, old convention vs new |
+| `_e36_kfloor.py` | the iid floor and Brownian reference per block |
+| `_e37_equal_check.py` | tip distances under the equal-length convention |

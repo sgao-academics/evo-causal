@@ -147,37 +147,13 @@ def whiten(X, C):
 
 # ---------------------------------------------------------------- tree conventions
 def power_lengths(root, rho):
-    """Grafen's power convention: node depth (h_i/H)^rho, edge length the difference.
+    """Grafen's power convention.  One implementation, in phylo.py.
 
-    rho = 1 reproduces the node-count convention used for the headline numbers, rho -> 0
-    approaches equal branch lengths, and rho > 1 pushes the branching towards the tips.
+    The local version that used to sit here differenced the depths the wrong way round
+    (parent minus child, which is negative on every edge) and then clamped to 1e-6, so every
+    branch length collapsed to a constant and the rho variants were not measuring rho at all.
     """
-    order = []
-    stack = [(root, False)]
-    while stack:
-        v, done = stack.pop()
-        if done or not v.children:
-            order.append(v)
-        else:
-            stack.append((v, True))
-            for c in v.children:
-                stack.append((c, False))
-    h = {}
-    for v in order:
-        h[id(v)] = 0 if not v.children else 1 + max(h[id(c)] for c in v.children)
-    H = h[id(root)] or 1
-    for v in order:
-        if v is not root:
-            par = None
-            for u in order:
-                if v in u.children:
-                    par = u
-                    break
-            dp = ((H - h[id(v)]) / float(H)) ** rho
-            dq = ((H - h[id(par)]) / float(H)) ** rho
-            v.length = max(dq - dp, 1e-6)
-    root.length = 0.0
-    return root
+    return phylo.power_lengths(root, rho)
 
 
 def cov_lambda(C, lam):
@@ -246,9 +222,13 @@ def trimmed(blk, root_template, convention='grafen', rho=1.0):
         species = [s for s, g in zip(species, good) if g]
         root = phylo.parse_newick(root_template)
         root, _ = phylo.prune(root, set(labels))
+    # pruning a synthesis tree to a subset leaves degree-one nodes behind; they carry no
+    # branching information and the node-count convention would charge for them
+    root = phylo.collapse_unary(root)
     if convention == 'grafen':
-        phylo.grafen_lengths(root)
-        if rho != 1.0:
+        if rho == 1.0:
+            phylo.grafen_lengths(root)
+        else:
             power_lengths(root, rho)
     elif convention == 'equal':
         phylo.equal_lengths(root)

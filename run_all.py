@@ -23,6 +23,7 @@ STAGES = [
     ('E5-E9  dose-response, PC, PPA, FCI, n', 'run_revision2.py'),
     ('E1     at the 12-tip tree of Fig. 1', '_e1_n12.py'),
     ('E10    fixed percentile vs top-k', '_e10_threshold.py'),
+    ('E10b   seed spread behind the Fig. S1 error bars', 'e10_threshold_seeds.py'),
     ('E11    four families on one grid', '_e11_families.py'),
     ('E11    AUROC for the same grid', '_e11_auroc.py'),
     ('E12    Pearson, Spearman, O(D)GC', '_e12_spearman.py'),
@@ -31,6 +32,7 @@ STAGES = [
     ('E15    screen on the signal arm', 'e15b_signal.py'),
     ('E17    concentration of the admitted set', 'e16b_hub.py'),
     ('E20    four procedures, ten seeds', 'e23_families10.py'),
+    ('E20b   NOTEARS under the threshold-free metric (Fig. S3b)', 'e23b_notears_auroc.py'),
     ('E21    rank-one residual search, archived trial', 'e21_lrsem.py'),
     ('E25    the ADMG family, maximum likelihood with bidirected edges', 'exp_admg.py'),
     ('E26    real traits on the real synthesis tree', 'exp_real.py'),
@@ -43,8 +45,9 @@ STAGES = [
     ('E32    the k band, and thirty-seed intervals', 'exp_kband.py'),
 ]
 
-FIGURES = ['make_fig1.py', 'make_fig2_fig4_fig5.py', 'make_fig3.py',
-           'make_fig6_fig7.py', 'make_fig_real.py', 'make_fig_resit.py']
+FIGURES = ['make_fig1.py', 'make_fig2.py', 'make_fig3.py', 'make_fig4.py',
+           'make_fig5.py', 'make_figS1.py', 'make_figS2.py', 'make_figS3.py',
+           'make_figS4.py']
 
 # Every result file the manuscript reads, with the number of entries expected.
 EXPECTED = {
@@ -58,6 +61,7 @@ EXPECTED = {
     'e8_fci.json': 6,
     'e9_nsense.json': 10,
     'e10_threshold.json': 5,
+    'e10_threshold_seeds.json': 5,
     'e11_families.json': 6,
     'e11_auroc.json': 6,
     'e12_spearman.json': 12,
@@ -76,6 +80,7 @@ EXPECTED = {
     'e26_real.json': 3,
     'e22_seed_spread.json': 5,
     'e23_families10.json': 6,
+    'e23b_notears_auroc.json': 6,
     'e27_birds.json': 2,
     'e28_calib.json': 31,
     'e29_resit.json': 6,

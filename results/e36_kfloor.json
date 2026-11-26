@@ -1,0 +1,57 @@
+{
+ "ecology": {
+  "n": 919,
+  "d": 6,
+  "iid_median": 0.084,
+  "iid_q95": 0.09,
+  "bm_median": 0.929,
+  "obs_mean": 0.493,
+  "obs_min": 0.161,
+  "obs_max": 1.385,
+  "at_floor": 0
+ },
+ "life_history": {
+  "n": 337,
+  "d": 6,
+  "iid_median": 0.116,
+  "iid_q95": 0.134,
+  "bm_median": 0.969,
+  "obs_mean": 0.99,
+  "obs_min": 0.439,
+  "obs_max": 1.979,
+  "at_floor": 0
+ },
+ "range_climate": {
+  "n": 2651,
+  "d": 12,
+  "iid_median": 0.058,
+  "iid_q95": 0.061,
+  "bm_median": 0.929,
+  "obs_mean": 0.22,
+  "obs_min": 0.079,
+  "obs_max": 0.48,
+  "at_floor": 0
+ },
+ "bird_diet": {
+  "n": 1143,
+  "d": 10,
+  "iid_median": 0.055,
+  "iid_q95": 0.059,
+  "bm_median": 0.912,
+  "obs_mean": 0.297,
+  "obs_min": 0.11,
+  "obs_max": 0.86,
+  "at_floor": 0
+ },
+ "bird_niche": {
+  "n": 1140,
+  "d": 9,
+  "iid_median": 0.059,
+  "iid_q95": 0.062,
+  "bm_median": 0.909,
+  "obs_mean": 0.657,
+  "obs_min": 0.094,
+  "obs_max": 3.475,
+  "at_floor": 0
+ }
+}

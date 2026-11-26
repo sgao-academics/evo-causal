@@ -1,0 +1,22 @@
+{
+ "n": 337,
+ "d": 6,
+ "r1": 3.292,
+ "p": 0.00024993751562109475,
+ "threshold": 1.33,
+ "top": "adult body mass (g)",
+ "top_share": 0.273,
+ "entropy": 0.916,
+ "deflated_r1": 2.035,
+ "deflated_p": 0.00024993751562109475,
+ "hub": "adult body mass (g)",
+ "share": {
+  "adult body mass (g)": 0.273,
+  "age at sexual maturity (d)": 0.216,
+  "maximum longevity (mo)": 0.179,
+  "weaning age (d)": 0.177,
+  "gestation length (d)": 0.138,
+  "litter size": 0.016
+ },
+ "verdict": "one direction dominates and subtracting it does not clear the excess: the direction is a property of the trait set, and edge-level claims are not identified"
+}

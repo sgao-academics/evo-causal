@@ -1,0 +1,190 @@
+{
+ "full": {
+  "n": 6,
+  "d": 6,
+  "w": [
+   2.3825,
+   1.0465,
+   0.8273,
+   0.7111,
+   0.5883,
+   0.4443
+  ],
+  "r1": 3.293,
+  "r2": 1.6282,
+  "top": "adult body mass (g)",
+  "top_share": 0.273,
+  "second": "age at sexual maturity (d)",
+  "second_share": 0.216,
+  "entropy": 0.9158,
+  "edge_fit": 0.9202,
+  "shares": {
+   "adult body mass (g)": 0.273,
+   "gestation length (d)": 0.1388,
+   "maximum longevity (mo)": 0.1791,
+   "litter size": 0.0162,
+   "weaning age (d)": 0.1769,
+   "age at sexual maturity (d)": 0.216
+  },
+  "deg": [
+   4,
+   1,
+   2,
+   0,
+   2,
+   3
+  ],
+  "hub": "adult body mass (g)",
+  "hub_share": 0.3333,
+  "hub2": "age at sexual maturity (d)",
+  "defl_r1": 2.0353,
+  "defl_hub": "age at sexual maturity (d)",
+  "defl_share": 0.25,
+  "defl_deg": [
+   1,
+   3,
+   2,
+   0,
+   3,
+   3
+  ]
+ },
+ "no_mass": {
+  "n": 5,
+  "d": 5,
+  "w": [
+   1.8669,
+   1.0294,
+   0.8244,
+   0.711,
+   0.5684
+  ],
+  "r1": 2.3834,
+  "r2": 1.4679,
+  "top": "age at sexual maturity (d)",
+  "top_share": 0.2984,
+  "second": "weaning age (d)",
+  "second_share": 0.25,
+  "entropy": 0.9251,
+  "edge_fit": 0.8687,
+  "shares": {
+   "gestation length (d)": 0.1861,
+   "maximum longevity (mo)": 0.2233,
+   "litter size": 0.0423,
+   "weaning age (d)": 0.25,
+   "age at sexual maturity (d)": 0.2984
+  },
+  "deg": [
+   2,
+   2,
+   0,
+   3,
+   3
+  ],
+  "hub": "age at sexual maturity (d)",
+  "hub_share": 0.3,
+  "hub2": "weaning age (d)",
+  "defl_r1": 1.9572,
+  "defl_hub": "age at sexual maturity (d)",
+  "defl_share": 0.3,
+  "defl_deg": [
+   2,
+   2,
+   1,
+   2,
+   3
+  ]
+ },
+ "no_longevity": {
+  "n": 5,
+  "d": 5,
+  "w": [
+   2.0858,
+   1.0099,
+   0.7595,
+   0.6419,
+   0.5029
+  ],
+  "r1": 2.863,
+  "r2": 1.591,
+  "top": "adult body mass (g)",
+  "top_share": 0.3007,
+  "second": "age at sexual maturity (d)",
+  "second_share": 0.237,
+  "entropy": 0.9085,
+  "edge_fit": 0.9379,
+  "shares": {
+   "adult body mass (g)": 0.3007,
+   "gestation length (d)": 0.1985,
+   "litter size": 0.027,
+   "weaning age (d)": 0.2367,
+   "age at sexual maturity (d)": 0.237
+  },
+  "deg": [
+   3,
+   2,
+   0,
+   2,
+   3
+  ],
+  "hub": "age at sexual maturity (d)",
+  "hub_share": 0.3,
+  "hub2": "adult body mass (g)",
+  "defl_r1": 2.1214,
+  "defl_hub": "weaning age (d)",
+  "defl_share": 0.3,
+  "defl_deg": [
+   2,
+   2,
+   1,
+   3,
+   2
+  ]
+ },
+ "no_litter": {
+  "n": 5,
+  "d": 5,
+  "w": [
+   2.3599,
+   0.868,
+   0.7286,
+   0.5909,
+   0.4526
+  ],
+  "r1": 3.5754,
+  "r2": 1.4695,
+  "top": "adult body mass (g)",
+  "top_share": 0.2809,
+  "second": "age at sexual maturity (d)",
+  "second_share": 0.2231,
+  "entropy": 0.9819,
+  "edge_fit": 0.9045,
+  "shares": {
+   "adult body mass (g)": 0.2809,
+   "gestation length (d)": 0.1379,
+   "maximum longevity (mo)": 0.1847,
+   "weaning age (d)": 0.1734,
+   "age at sexual maturity (d)": 0.2231
+  },
+  "deg": [
+   4,
+   1,
+   2,
+   1,
+   2
+  ],
+  "hub": "adult body mass (g)",
+  "hub_share": 0.4,
+  "hub2": "age at sexual maturity (d)",
+  "defl_r1": 1.9594,
+  "defl_hub": "age at sexual maturity (d)",
+  "defl_share": 0.3,
+  "defl_deg": [
+   1,
+   2,
+   2,
+   2,
+   3
+  ]
+ }
+}

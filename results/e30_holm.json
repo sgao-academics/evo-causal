@@ -5,9 +5,9 @@
    "d": 6,
    "k": 2,
    "obs": [
-    1.465,
-    1.47,
-    1.404
+    1.477,
+    1.504,
+    1.293
    ],
    "null_mean": [
     2.231,
@@ -26,8 +26,8 @@
    ],
    "p": [
     1.0,
-    0.6259,
-    0.9008
+    0.5607,
+    0.9994
    ]
   },
   "life_history": {
@@ -35,9 +35,9 @@
    "d": 6,
    "k": 2,
    "obs": [
-    3.994,
-    1.682,
-    1.294
+    3.293,
+    1.628,
+    1.423
    ],
    "null_mean": [
     2.276,
@@ -55,9 +55,9 @@
     1.98
    ],
    "p": [
-    0.0002,
-    0.4711,
-    0.9992
+    0.0068,
+    0.5155,
+    0.9454
    ]
   },
   "range_climate": {
@@ -65,9 +65,9 @@
    "d": 12,
    "k": 4,
    "obs": [
-    3.574,
-    4.476,
-    3.418
+    3.595,
+    4.505,
+    3.164
    ],
    "null_mean": [
     2.352,
@@ -85,7 +85,7 @@
     2.182
    ],
    "p": [
-    0.012,
+    0.0108,
     0.0002,
     0.0002
    ]
@@ -95,9 +95,9 @@
    "d": 10,
    "k": 3,
    "obs": [
-    1.826,
-    1.527,
-    1.531
+    1.769,
+    1.51,
+    1.58
    ],
    "null_mean": [
     2.241,
@@ -115,9 +115,9 @@
     2.116
    ],
    "p": [
-    0.9086,
-    0.7858,
-    0.2517
+    0.972,
+    0.794,
+    0.2318
    ]
   },
   "bird_niche": {
@@ -125,9 +125,9 @@
    "d": 9,
    "k": 3,
    "obs": [
-    1.758,
-    1.634,
-    1.537
+    1.675,
+    1.615,
+    1.425
    ],
    "null_mean": [
     2.31,
@@ -145,9 +145,9 @@
     2.221
    ],
    "p": [
-    0.9856,
-    0.7269,
-    0.2869
+    0.9982,
+    0.7327,
+    0.6685
    ]
   }
  },
@@ -158,33 +158,33 @@
    "survives": false
   },
   "ecology:r2": {
-   "p": 0.6259,
+   "p": 0.5607,
    "holm": 1.0,
    "survives": false
   },
   "ecology:r3": {
-   "p": 0.9008,
+   "p": 0.9994,
    "holm": 1.0,
    "survives": false
   },
   "life_history:r1": {
-   "p": 0.0002,
-   "holm": 0.003,
-   "survives": true
+   "p": 0.0068,
+   "holm": 0.0884,
+   "survives": false
   },
   "life_history:r2": {
-   "p": 0.4711,
+   "p": 0.5155,
    "holm": 1.0,
    "survives": false
   },
   "life_history:r3": {
-   "p": 0.9992,
+   "p": 0.9454,
    "holm": 1.0,
    "survives": false
   },
   "range_climate:r1": {
-   "p": 0.012,
-   "holm": 0.144,
+   "p": 0.0108,
+   "holm": 0.1296,
    "survives": false
   },
   "range_climate:r2": {
@@ -198,83 +198,83 @@
    "survives": true
   },
   "bird_diet:r1": {
-   "p": 0.9086,
+   "p": 0.972,
    "holm": 1.0,
    "survives": false
   },
   "bird_diet:r2": {
-   "p": 0.7858,
+   "p": 0.794,
    "holm": 1.0,
    "survives": false
   },
   "bird_diet:r3": {
-   "p": 0.2517,
+   "p": 0.2318,
    "holm": 1.0,
    "survives": false
   },
   "bird_niche:r1": {
-   "p": 0.9856,
+   "p": 0.9982,
    "holm": 1.0,
    "survives": false
   },
   "bird_niche:r2": {
-   "p": 0.7269,
+   "p": 0.7327,
    "holm": 1.0,
    "survives": false
   },
   "bird_niche:r3": {
-   "p": 0.2869,
+   "p": 0.6685,
    "holm": 1.0,
    "survives": false
   }
  },
  "preproc": {
   "ecology": {
-   "r1_headline": 1.465,
-   "r1_nolog": 1.456,
-   "loo_min": 1.37,
-   "loo_max": 1.494,
+   "r1_headline": 1.477,
+   "r1_nolog": 1.476,
+   "loo_min": 1.385,
+   "loo_max": 1.505,
    "loo": {
-    "5-1_AdultBodyMass_g": 1.484,
-    "12-1_HabitatBreadth": 1.37,
-    "12-2_Terrestriality": 1.372,
-    "15-1_LitterSize": 1.494,
-    "6-1_DietBreadth": 1.473,
-    "6-2_TrophicLevel": 1.452
+    "5-1_AdultBodyMass_g": 1.5,
+    "12-1_HabitatBreadth": 1.385,
+    "12-2_Terrestriality": 1.388,
+    "15-1_LitterSize": 1.505,
+    "6-1_DietBreadth": 1.495,
+    "6-2_TrophicLevel": 1.462
    }
   },
   "life_history": {
-   "r1_headline": 3.994,
-   "r1_nolog": 2.235,
-   "loo_min": 3.034,
-   "loo_max": 4.252,
+   "r1_headline": 3.293,
+   "r1_nolog": 2.2,
+   "loo_min": 2.383,
+   "loo_max": 3.575,
    "loo": {
-    "5-1_AdultBodyMass_g": 3.034,
-    "9-1_GestationLen_d": 3.486,
-    "17-1_MaxLongevity_m": 3.436,
-    "15-1_LitterSize": 4.252,
-    "25-1_WeaningAge_d": 3.542,
-    "23-1_SexualMaturityAge_d": 3.213
+    "5-1_AdultBodyMass_g": 2.383,
+    "9-1_GestationLen_d": 3.046,
+    "17-1_MaxLongevity_m": 2.863,
+    "15-1_LitterSize": 3.575,
+    "25-1_WeaningAge_d": 2.867,
+    "23-1_SexualMaturityAge_d": 2.676
    }
   },
   "range_climate": {
-   "r1_headline": 3.574,
-   "r1_nolog": 3.666,
-   "loo_min": 3.451,
-   "loo_max": 3.651,
+   "r1_headline": 3.595,
+   "r1_nolog": 3.54,
+   "loo_min": 3.461,
+   "loo_max": 3.673,
    "loo": {
-    "26-1_GR_Area_km2": 3.647,
-    "26-2_GR_MaxLat_dd": 3.583,
-    "26-3_GR_MinLat_dd": 3.6,
-    "26-6_GR_MinLong_dd": 3.495,
-    "26-7_GR_MRLong_dd": 3.471,
-    "26-5_GR_MaxLong_dd": 3.451,
-    "27-2_HuPopDen_Mean_n/km2": 3.651,
-    "28-1_Precip_Mean_mm": 3.638,
-    "28-2_Temp_Mean_01degC": 3.541,
-    "30-1_AET_Mean_mm": 3.628,
-    "30-2_PET_Mean_mm": 3.597,
-    "27-4_HuPopDen_Change": 3.613
+    "26-1_GR_Area_km2": 3.636,
+    "26-2_GR_MaxLat_dd": 3.502,
+    "26-3_GR_MinLat_dd": 3.584,
+    "26-6_GR_MinLong_dd": 3.617,
+    "26-7_GR_MRLong_dd": 3.587,
+    "26-5_GR_MaxLong_dd": 3.558,
+    "27-2_HuPopDen_Mean_n/km2": 3.673,
+    "28-1_Precip_Mean_mm": 3.587,
+    "28-2_Temp_Mean_01degC": 3.461,
+    "30-1_AET_Mean_mm": 3.57,
+    "30-2_PET_Mean_mm": 3.523,
+    "27-4_HuPopDen_Change": 3.569
    }
   }
  }

@@ -1,0 +1,349 @@
+{
+ "bird_diet": {
+  "block": "bird_diet",
+  "n": 1143,
+  "d": 10,
+  "species": 1143,
+  "K": [
+   0.86,
+   0.272,
+   0.157,
+   0.11,
+   0.214,
+   0.151,
+   0.182,
+   0.697,
+   0.179,
+   0.144
+  ],
+  "K_mean": 0.297,
+  "K_median": 0.18,
+  "K_min": 0.11,
+  "K_max": 0.86,
+  "K_over_0p30": 2,
+  "cols": [
+   "BodyMass-Value",
+   "Diet-Inv",
+   "Diet-Vend",
+   "Diet-Vect",
+   "Diet-Vfish",
+   "Diet-Scav",
+   "Diet-Fruit",
+   "Diet-Nect",
+   "Diet-Seed",
+   "Diet-PlantO"
+  ],
+  "labels": [
+   "body mass (g)",
+   "invertebrates (% of diet)",
+   "endotherms (% of diet)",
+   "ectotherms (% of diet)",
+   "fish (% of diet)",
+   "scavenging (% of diet)",
+   "fruit (% of diet)",
+   "nectar (% of diet)",
+   "seed (% of diet)",
+   "other plant (% of diet)"
+  ],
+  "logged": [
+   "BodyMass-Value"
+  ],
+  "dropped": [],
+  "contrast": {
+   "r": [
+    1.769,
+    1.51,
+    1.58
+   ],
+   "p": [
+    0.00025,
+    0.00025,
+    0.00025
+   ],
+   "lam": [
+    1.642,
+    1.327,
+    1.294
+   ],
+   "null_mean": [
+    1.167,
+    1.14,
+    1.121
+   ],
+   "null_q95": [
+    1.214,
+    1.177,
+    1.154
+   ],
+   "null_max": [
+    1.275,
+    1.234,
+    1.202
+   ]
+  },
+  "raw": {
+   "r": 2.294
+  },
+  "tetrad": {
+   "n_tetrads": 210,
+   "reject": 0.7476190476190476,
+   "size": 0.06461904761904762,
+   "median_abs_z": 6.514264538045008
+  },
+  "hub": {
+   "top": 1,
+   "top_label": "invertebrates (% of diet)",
+   "top_deg": 6,
+   "share": 0.3,
+   "second_label": "fruit (% of diet)",
+   "second_deg": 3,
+   "deg": [
+    0,
+    6,
+    2,
+    2,
+    2,
+    1,
+    3,
+    0,
+    2,
+    2
+   ]
+  },
+  "hub_deflated": {
+   "top": 6,
+   "top_label": "fruit (% of diet)",
+   "top_deg": 4,
+   "share": 0.2,
+   "deg": [
+    1,
+    3,
+    2,
+    1,
+    2,
+    1,
+    4,
+    1,
+    2,
+    3
+   ]
+  },
+  "r_after_deflation": 1.699,
+  "clade": "Aves",
+  "variants": {
+   "grafen_1.0": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.769,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "grafen_0.5": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.767,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "grafen_2.0": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.772,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "equal": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.791,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "lambda_0.8": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.875,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "lambda_0.5": {
+    "n": 1143,
+    "d": 10,
+    "r": 1.944,
+    "p": 0.00067,
+    "K_mean": NaN
+   }
+  }
+ },
+ "bird_niche": {
+  "block": "bird_niche",
+  "n": 1140,
+  "d": 9,
+  "species": 1140,
+  "K": [
+   1.205,
+   0.408,
+   0.159,
+   0.112,
+   0.113,
+   0.094,
+   0.177,
+   3.475,
+   0.166
+  ],
+  "K_mean": 0.657,
+  "K_median": 0.166,
+  "K_min": 0.094,
+  "K_max": 3.475,
+  "K_over_0p30": 3,
+  "cols": [
+   "BodyMass-Value",
+   "ForStrat-wataroundsurf",
+   "ForStrat-ground",
+   "ForStrat-understory",
+   "ForStrat-midhigh",
+   "ForStrat-canopy",
+   "ForStrat-aerial",
+   "Nocturnal",
+   "PelagicSpecialist"
+  ],
+  "labels": [
+   "body mass (g)",
+   "water around surface (%)",
+   "ground (%)",
+   "understory (%)",
+   "mid-high (%)",
+   "canopy (%)",
+   "aerial (%)",
+   "nocturnality",
+   "pelagic specialist"
+  ],
+  "logged": [
+   "BodyMass-Value"
+  ],
+  "dropped": [],
+  "contrast": {
+   "r": [
+    1.675,
+    1.615,
+    1.425
+   ],
+   "p": [
+    0.00025,
+    0.00025,
+    0.00025
+   ],
+   "lam": [
+    1.558,
+    1.395,
+    1.16
+   ],
+   "null_mean": [
+    1.156,
+    1.129,
+    1.11
+   ],
+   "null_q95": [
+    1.204,
+    1.167,
+    1.145
+   ],
+   "null_max": [
+    1.295,
+    1.22,
+    1.195
+   ]
+  },
+  "raw": {
+   "r": 2.657
+  },
+  "tetrad": {
+   "n_tetrads": 126,
+   "reject": 0.3253968253968254,
+   "size": 0.05447089947089947,
+   "median_abs_z": 0.8494863608628134
+  },
+  "hub": {
+   "top": 4,
+   "top_label": "mid-high (%)",
+   "top_deg": 4,
+   "share": 0.222,
+   "second_label": "ground (%)",
+   "second_deg": 4,
+   "deg": [
+    0,
+    1,
+    4,
+    4,
+    4,
+    3,
+    2,
+    0,
+    0
+   ]
+  },
+  "hub_deflated": {
+   "top": 4,
+   "top_label": "mid-high (%)",
+   "top_deg": 6,
+   "share": 0.333,
+   "deg": [
+    0,
+    2,
+    2,
+    3,
+    6,
+    3,
+    1,
+    0,
+    1
+   ]
+  },
+  "r_after_deflation": 1.845,
+  "clade": "Aves",
+  "variants": {
+   "grafen_1.0": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.675,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "grafen_0.5": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.673,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "grafen_2.0": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.679,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "equal": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.751,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "lambda_0.8": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.847,
+    "p": 0.00067,
+    "K_mean": NaN
+   },
+   "lambda_0.5": {
+    "n": 1140,
+    "d": 9,
+    "r": 1.922,
+    "p": 0.00067,
+    "K_mean": NaN
+   }
+  }
+ }
+}

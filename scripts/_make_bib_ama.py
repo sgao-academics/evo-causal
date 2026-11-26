@@ -11,10 +11,15 @@ checks.
 import os, io, json, re, sys
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-PAPER = os.path.join(os.path.dirname(BASE), 'paper')
+PAPER = os.path.join(os.path.dirname(BASE), 'paper', 'sagej')
 sys.path.insert(0, BASE)
 
-refs = json.load(io.open(os.path.join(BASE, '_bib_clean.json'), encoding='utf-8'))
+_BIB = [os.path.join(BASE, '_bib_clean.json'),
+        os.path.join(BASE, '..', 'revision', '_bib_clean.json')]
+_BIB = [p for p in _BIB if os.path.exists(p)]
+if not _BIB:
+    raise SystemExit('_bib_clean.json not found next to the script or under revision/')
+refs = json.load(io.open(_BIB[0], encoding='utf-8'))
 
 # entries resolved from CrossRef while preparing the split submission (verified 2026-11-25)
 NEW = [
@@ -28,6 +33,28 @@ NEW = [
          title='CAM: causal additive models, high-dimensional order search and penalized regression',
          venue='The Annals of Statistics', volume='42', issue='6', page='2526-2556',
          doi='10.1214/14-aos1260'),
+    # added in the second-review round: the two references the novelty claim rests on.
+    # Both records were pulled from CrossRef on 2026-11-26, not typed from memory.
+    dict(key='freckleton2000', year=2000,
+         authors=['Freckleton, Robert P.'],
+         title='Phylogenetic tests of ecological and evolutionary hypotheses: checking for '
+               'phylogenetic independence',
+         venue='Functional Ecology', volume='14', page='129-134',
+         doi='10.1046/j.1365-2435.2000.00400.x', issue=None),
+    dict(key='schraiber2024', year=2024,
+         authors=['Schraiber, Joshua G.', 'Edge, Michael D.', 'Pennell, Matt'],
+         title='Unifying approaches from statistical genetics and phylogenetics for mapping '
+               'phenotypes in structured populations',
+         venue='PLOS Biology', volume='22', page='e3002847',
+         doi='10.1371/journal.pbio.3002847', issue=None),
+    # upham2019 was in the emitted table but never in _bib_clean.json, so regenerating the
+    # bibliography silently dropped it.  Record pulled from CrossRef 2026-11-26.
+    dict(key='upham2019', year=2019,
+         authors=['Upham, Nathan S.', 'Esselstyn, Jacob A.', 'Jetz, Walter'],
+         title='Inferring the mammal tree: species-level sets of phylogenies for questions in '
+               'ecology, evolution, and conservation',
+         venue='PLOS Biology', volume='17', page='e3000494',
+         doi='10.1371/journal.pbio.3000494', issue=None),
 ]
 
 BY = {r['key']: r for r in refs}

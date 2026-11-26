@@ -19,6 +19,7 @@ Manuscript.pdf
 # ---------------------------------------------------------------------------
 revision/
 scripts/_attic/
+_attic/
 notebooks/
 /*.md
 /*.txt

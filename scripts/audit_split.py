@@ -18,7 +18,7 @@ import io, os, re, sys, json
 
 S = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(S)
-PAPER = os.path.join(ROOT, 'paper')
+PAPER = os.path.join(ROOT, 'paper', 'sagej')
 RES = os.path.join(ROOT, 'results')
 
 # the manuscripts are deliberately not part of this repository, so from a clean clone there is

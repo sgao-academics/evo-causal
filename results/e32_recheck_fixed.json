@@ -1,0 +1,59 @@
+{
+ "ecology": {
+  "n_old": 919,
+  "n_new": 919,
+  "d_new": 6,
+  "r_old": [
+   1.465,
+   1.47,
+   1.404
+  ],
+  "r_new": [
+   1.531,
+   1.551,
+   1.33
+  ],
+  "K_old": 1.037,
+  "K_new": 0.533,
+  "hub_old": "trophic level",
+  "hub_new": "diet breadth"
+ },
+ "life_history": {
+  "n_old": 337,
+  "n_new": 337,
+  "d_new": 6,
+  "r_old": [
+   3.994,
+   1.682,
+   1.294
+  ],
+  "r_new": [
+   3.249,
+   1.593,
+   1.371
+  ],
+  "K_old": 1.817,
+  "K_new": 1.212,
+  "hub_old": "adult body mass (g)",
+  "hub_new": "adult body mass (g)"
+ },
+ "range_climate": {
+  "n_old": 2651,
+  "n_new": 2651,
+  "d_new": 12,
+  "r_old": [
+   3.574,
+   4.476,
+   3.418
+  ],
+  "r_new": [
+   3.623,
+   4.487,
+   3.188
+  ],
+  "K_old": 0.468,
+  "K_new": 0.223,
+  "hub_old": "potential evapotranspiration (mm)",
+  "hub_new": "potential evapotranspiration (mm)"
+ }
+}
